@@ -6,11 +6,16 @@ public class Maze {
 	ArrayList<ArrayList<MazeNode>> tiles;
 	int height;
 	int width;
+	MazeNode start;
+	MazeNode end;
 	public Maze(int _height, int _width){
 		height = _height;
 		width = _width;
 		tiles = new ArrayList<ArrayList<MazeNode>>();
 		initTiles();
+		start = tiles.get(1).get(1);
+		end = tiles.get(height-2).get(width-2);
+		
 		generateMaze();
 		printMaze();
 	}
@@ -39,8 +44,8 @@ public class Maze {
 		MazeNode curr = null;
 		MazeNode prev = null;
 		
-		toGoBack.add(tiles.get(0).get(0));
-		parent.add(tiles.get(0).get(0));
+		toGoBack.add(tiles.get(1).get(1));
+		parent.add(tiles.get(1).get(1));
 		
 		while(!toGoBack.isEmpty()){
 			curr = toGoBack.pop();
@@ -107,9 +112,14 @@ public class Maze {
 	public void printMaze(){
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
-				int type = 0;
-				if(tiles.get(i).get(j).isWall() == true)
-					type = 1;
+				char type = '.';
+				if(tiles.get(i).get(j) == start)
+					type = 'S';
+				else if(tiles.get(i).get(j) == end)
+					type = 'E';	
+				else if(tiles.get(i).get(j).isWall() == true)
+					type = '#';
+				
 				System.out.print(type);
 			}
 			System.out.println();

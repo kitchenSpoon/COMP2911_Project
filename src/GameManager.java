@@ -5,6 +5,6 @@ public class GameManager {
 	}
 	
 	public static void gameLoop(){
-		Maze maze = new Maze(11,11);
+		Maze maze = new Maze(17,17);
 	}
 }
