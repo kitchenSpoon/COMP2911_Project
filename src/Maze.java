@@ -3,12 +3,13 @@ import java.util.*;
 import javax.swing.*;
 
 public class Maze {
-	public final static String IMAGE_PATH = "../images/";
+	public final static String IMAGE_PATH = "./images/";
 	ArrayList<ArrayList<MazeNode>> tiles;
 	int height;
 	int width;
 	MazeNode start;
 	MazeNode end;
+	MazeNode currentPosition;
 	public Maze(int _height, int _width){
 		height = _height;
 		width = _width;
@@ -16,6 +17,7 @@ public class Maze {
 		initTiles();
 		start = tiles.get(1).get(1);
 		end = tiles.get(height-2).get(width-2);
+		currentPosition = start;
 		
 		generateMaze();
 		printMaze();
@@ -121,12 +123,23 @@ public class Maze {
 		
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
+				if (currentPosition.x == j && currentPosition.y == i && tiles.get(i).get(j).isWall() == false) {
+					c.gridx = j;
+					c.gridy = i;
+					ImageIcon occupiedImage = new ImageIcon(IMAGE_PATH
+							+ "occupiedSquare_10.jpg");
+					JLabel occupiedLabel = new JLabel(occupiedImage);
+					mazePanel.add(occupiedLabel, c);
+					continue;
+				}
 				if(tiles.get(i).get(j) == start) {
 					c.gridx = j;
 					c.gridy = i;
-					ImageIcon startImage = new ImageIcon(IMAGE_PATH + "Start_10.jpg");
+					ImageIcon startImage = new ImageIcon(IMAGE_PATH
+							+ "Start_10.jpg");
 					JLabel startLabel = new JLabel(startImage);
 					mazePanel.add(startLabel, c);
+					
 				}
 				else if(tiles.get(i).get(j) == end) {
 					c.gridx = j;
