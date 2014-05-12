@@ -1,8 +1,9 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Stack;
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
 
 public class Maze {
+	public final static String IMAGE_PATH = "../images/";
 	ArrayList<ArrayList<MazeNode>> tiles;
 	int height;
 	int width;
@@ -18,6 +19,7 @@ public class Maze {
 		
 		generateMaze();
 		printMaze();
+		displayMaze();
 	}
 	
 	/**
@@ -104,6 +106,58 @@ public class Maze {
 			printMaze();
 			*/
 		}
+	}
+	
+	/**
+	 * Display the maze
+	 */
+	public void displayMaze () {
+		
+		JPanel mazePanel = new JPanel();
+		mazePanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		mazePanel.setVisible(true);
+		c.fill = GridBagConstraints.BOTH;
+		
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				if(tiles.get(i).get(j) == start) {
+					c.gridx = j;
+					c.gridy = i;
+					ImageIcon startImage = new ImageIcon(IMAGE_PATH + "Start_10.jpg");
+					JLabel startLabel = new JLabel(startImage);
+					mazePanel.add(startLabel, c);
+				}
+				else if(tiles.get(i).get(j) == end) {
+					c.gridx = j;
+					c.gridy = i;
+					ImageIcon endImage = new ImageIcon(IMAGE_PATH + "End_10.jpg");
+					JLabel endLabel = new JLabel(endImage);
+					mazePanel.add(endLabel, c);
+				}
+				else if(tiles.get(i).get(j).isWall() == true) {
+					c.gridx = j;
+					c.gridy = i;
+					ImageIcon wallImage = new ImageIcon(IMAGE_PATH + "Wall_10.jpg");
+					JLabel wallLabel = new JLabel(wallImage);
+					mazePanel.add(wallLabel, c);
+				}
+				else {
+					c.gridx = j;
+					c.gridy = i;
+					ImageIcon pathImage = new ImageIcon(IMAGE_PATH + "Path_10.jpg");
+					JLabel pathLabel = new JLabel(pathImage);
+					mazePanel.add(pathLabel, c);
+				}
+			}
+		}
+		
+		JFrame mazeFrame = new JFrame();
+		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mazeFrame.add(mazePanel);
+		mazeFrame.pack();
+		mazeFrame.setVisible(true);
+		
 	}
 	
 	/**
