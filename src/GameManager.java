@@ -12,5 +12,11 @@ public class GameManager {
 		Renderer r = new Renderer();
 		
 		r.renderAll();
+
+		// Debugging InputReceiver
+		while (true) {
+			System.out.println(r.getInput());			
+		}
+		
 	}
 }
