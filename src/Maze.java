@@ -22,8 +22,12 @@ public class Maze {
 		generateMaze();
 		printMaze();
 		displayMaze();
+		
 	}
-	
+	public ArrayList<ArrayList<MazeNode>> getTiles() {
+		return tiles;
+	}
+
 	/**
 	 * Start maze filled with walls
 	 */
@@ -31,7 +35,13 @@ public class Maze {
 		for(int i = 0; i < height; i++){
 			tiles.add(new ArrayList<MazeNode>());
 			for(int j = 0; j < width; j++){
-				tiles.get(i).add(new MazeNode(i,j,true));
+				if (i == 1 && j == 1) {
+					tiles.get(i).add(new MazeNode(i,j,true, true, false));
+				} else if (i == height - 2 && j == width - 2) {
+					tiles.get(i).add(new MazeNode(i,j,true, false, true));
+				} else {
+					tiles.get(i).add(new MazeNode(i,j,true, false, false));
+				}
 			}
 		}
 	}
@@ -113,6 +123,7 @@ public class Maze {
 	/**
 	 * Display the maze
 	 */
+	
 	public void displayMaze () {
 		
 		JPanel mazePanel = new JPanel();
@@ -164,12 +175,12 @@ public class Maze {
 				}
 			}
 		}
-		
-		JFrame mazeFrame = new JFrame();
-		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mazeFrame.add(mazePanel);
-		mazeFrame.pack();
-		mazeFrame.setVisible(true);
+//		
+//		JFrame mazeFrame = new JFrame();
+//		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		mazeFrame.add(mazePanel);
+//		mazeFrame.pack();
+//		mazeFrame.setVisible(true);
 		
 	}
 	
