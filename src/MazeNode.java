@@ -1,13 +1,14 @@
 
 public class MazeNode implements Displayable {
 	int x,y;
-	boolean isWall, isStart, isEnd;
+	boolean isWall, isStart, isEnd, toRender;
 	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd){
 		x = _x;
 		y = _y;
 		isWall = _isWall;
 		isStart = _isStart;
 		isEnd = _isEnd;
+		toRender = true;
 	}
 	
 	public int getX(){
@@ -51,5 +52,10 @@ public class MazeNode implements Displayable {
 		} else {
 			return "Path_10.jpg";
 		}
+	}
+
+	@Override
+	public boolean toRender() {
+		return toRender;
 	}
 }

@@ -8,14 +8,9 @@ public class GameManager {
 	
 	public static void gameLoop(){
 		Maze maze = new Maze(17,17);
+		Player player = new Player("Jack",1,1);
 		Renderer r = new Renderer();
 		
-		for (ArrayList<MazeNode> list : maze.getTiles()) {
-			for (MazeNode mn : list) {
-				r.render(mn);
-			}
-		}
-		
-		r.generate();
+		r.renderAll();
 	}
 }

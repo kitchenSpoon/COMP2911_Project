@@ -4,10 +4,13 @@ public class Player implements Displayable {
 	private int x;
 	private int y;
 	private String name;
+	boolean toRender;
 	public Player(String n, int xStart, int yStart) {
 		x = xStart;
 		y = yStart;
 		name = n;
+		toRender = true;
+		Renderer.addToRenderer(this);
 	}
 	@Override
 	public int getX() {
@@ -27,8 +30,11 @@ public class Player implements Displayable {
 	}
 	@Override
 	public String getImagePath() {
-		// TODO Auto-generated method stub
 		return "occupiedSquare_10.jpg";
+	}
+	@Override
+	public boolean toRender() {
+		return toRender;
 	}
 	
 

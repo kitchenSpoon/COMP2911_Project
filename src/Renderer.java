@@ -1,5 +1,6 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,8 +11,10 @@ import javax.swing.JPanel;
 public class Renderer {
 
 	public final static String IMAGE_PATH = "./images/";
-	JPanel mazePanel;
-	GridBagConstraints c;
+	static JPanel mazePanel;
+	static GridBagConstraints c;
+	public static ArrayList<Displayable> toBeRendered = new ArrayList<Displayable>();
+	
 	public Renderer() {
 		mazePanel = new JPanel();
 		mazePanel.setLayout(new GridBagLayout());
@@ -20,7 +23,23 @@ public class Renderer {
 		c.fill = GridBagConstraints.BOTH;
 	}
 	
-	public void render(Displayable o) {
+	public static void addToRenderer(Displayable object){
+		toBeRendered.add(object);
+	}
+	
+	public static void removeFromRenderer(Displayable object){
+		toBeRendered.remove(object);
+	}
+	
+	public void renderAll(){
+		for(Displayable d : toBeRendered){
+			if(d.toRender())
+				render(d);
+		}
+		generate();
+	}
+	
+	public static void render(Displayable o) {
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = o.getX();
 		c.gridy = o.getY();
@@ -28,7 +47,8 @@ public class Renderer {
 		JLabel label = new JLabel(image);
 		mazePanel.add(label, c);
 	}
-	public void generate() {
+	
+	public static void generate() {
 		JFrame mazeFrame = new JFrame();
 		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mazeFrame.add(mazePanel);

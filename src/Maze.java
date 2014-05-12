@@ -21,9 +21,10 @@ public class Maze {
 		
 		generateMaze();
 		printMaze();
-		displayMaze();
-		
+		//displayMaze();
+		addMazeToRenderer();
 	}
+	
 	public ArrayList<ArrayList<MazeNode>> getTiles() {
 		return tiles;
 	}
@@ -120,6 +121,10 @@ public class Maze {
 		}
 	}
 	
+	public boolean isWall(int x, int y){
+		return isWall(x,y);
+	}
+	
 	/**
 	 * Display the maze
 	 */
@@ -182,6 +187,14 @@ public class Maze {
 //		mazeFrame.pack();
 //		mazeFrame.setVisible(true);
 		
+	}
+	
+	private void addMazeToRenderer(){
+		for (ArrayList<MazeNode> list : tiles) {
+			for (MazeNode mn : list) {
+				Renderer.addToRenderer(mn);
+			}
+		}
 	}
 	
 	/**
