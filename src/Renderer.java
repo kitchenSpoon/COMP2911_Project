@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 
 public class Renderer {
 
-	public final static String IMAGE_PATH = "../images/";
+	public final static String IMAGE_PATH = "./images/";
 	static JPanel mazePanel;
 	static GridBagConstraints c;
 	public static ArrayList<Displayable> toBeRendered = new ArrayList<Displayable>();
@@ -24,7 +24,7 @@ public class Renderer {
 		mazePanel.setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
 		mazePanel.setVisible(true);
-		c.fill = GridBagConstraints.BOTH;		
+		c.fill = GridBagConstraints.BOTH;	
 	}
 	
 	public static void addToRenderer(Displayable object){
@@ -40,7 +40,7 @@ public class Renderer {
 			if(d.toRender())
 				render(d);
 		}
-		generate();
+		//generate();
 	}
 	
 	public static void render(Displayable o) {
