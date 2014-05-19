@@ -8,39 +8,42 @@ public class GameManager {
 	
 	public static void gameLoop(){
 		Player player = new Player("Jack",1,1);
-		Maze maze = new Maze(37,37);
+		Maze maze = new Maze(11,11);
 		Renderer r = new Renderer();
 		
 		r.renderAll();
+		
 		//r.generate();
 		// Debugging InputReceiver
 		while (true) {
-			System.out.println(r.getInput());	
+			//System.out.println(r.getInput());	
+			
 			String input = r.getInput();
 			if(input.equals("UP") || 
 				input.equals("DOWN") ||
 				input.equals("LEFT") ||
 				input.equals("RIGHT")){
-					updatePlayer(player,maze,input);
+				player.updatePlayer(maze,input);
 					r.renderAll();
 			}
+			maze.printMaze(player.getX(),player.getY());
+			if(checkGame(player,maze)){
+				break;
+			}
 		}
+		System.out.println("You Win!!");
 		
 	}
 	
-	public static void updatePlayer(Player player,Maze maze,String input){
-		if(input.equals("UP")){
-			player.setX(player.getX() - 1);
-			System.out.println(player.getX());	
-		} 
-		else if (input.equals("DOWN")){
-			player.setX(player.getX() + 1);
+	public static boolean checkGame(Player player, Maze maze){
+		MazeNode end = maze.getEnd();
+		if(player.getX() == end.getX() &&
+			player.getY() == end.getY()){
+			return true;
 		}
-		else if (input.equals("LEFT")){
-			player.setY(player.getY() - 1);
-		}
-		else if (input.equals("RIGHT")){
-			player.setY(player.getY() + 1);
-		}
+		return false;
+	
 	}
+	
+	
 }

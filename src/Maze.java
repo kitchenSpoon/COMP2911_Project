@@ -29,6 +29,10 @@ public class Maze {
 		return tiles;
 	}
 
+	public MazeNode getEnd(){
+		return end;
+	}
+	
 	/**
 	 * Start maze filled with walls
 	 */
@@ -122,7 +126,7 @@ public class Maze {
 	}
 	
 	public boolean isWall(int x, int y){
-		return isWall(x,y);
+		return tiles.get(x).get(y).isWall();
 	}
 	
 	/**
@@ -210,6 +214,26 @@ public class Maze {
 					type = 'E';	
 				else if(tiles.get(i).get(j).isWall() == true)
 					type = '#';
+				
+				System.out.print(type);
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public void printMaze(int x,int y){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				char type = '.';
+				if(tiles.get(i).get(j) == start)
+					type = 'S';
+				else if(tiles.get(i).get(j) == end)
+					type = 'E';	
+				else if(tiles.get(i).get(j).isWall() == true)
+					type = '#';
+				if(i == x && j == y)
+					type = 'P';
 				
 				System.out.print(type);
 			}

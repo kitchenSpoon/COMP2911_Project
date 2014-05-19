@@ -15,7 +15,7 @@ public class Renderer {
 	static JPanel mazePanel;
 	static GridBagConstraints c;
 	public static ArrayList<Displayable> toBeRendered = new ArrayList<Displayable>();
-	
+	static JFrame mazeFrame;
 	private static InputReceiver InputReceiver = new InputReceiver();
 	private static String input;
 	
@@ -25,6 +25,8 @@ public class Renderer {
 		c = new GridBagConstraints();
 		mazePanel.setVisible(true);
 		c.fill = GridBagConstraints.BOTH;	
+		mazeFrame = new JFrame();
+		generate();
 	}
 	
 	public static void addToRenderer(Displayable object){
@@ -36,6 +38,7 @@ public class Renderer {
 	}
 	
 	public void renderAll(){
+		mazePanel.removeAll();
 		for(Displayable d : toBeRendered){
 			if(d.toRender())
 				render(d);
@@ -44,16 +47,19 @@ public class Renderer {
 	}
 	
 	public static void render(Displayable o) {
+		
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = o.getX();
 		c.gridy = o.getY();
 		ImageIcon image = new ImageIcon(IMAGE_PATH + o.getImagePath());
 		JLabel label = new JLabel(image);
 		mazePanel.add(label, c);
+		mazePanel.repaint();
+		
 	}
 	
 	public static void generate() {
-		JFrame mazeFrame = new JFrame();
+		
 		mazeFrame.addKeyListener(InputReceiver);
 		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mazeFrame.add(mazePanel);

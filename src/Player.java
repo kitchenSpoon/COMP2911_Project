@@ -37,6 +37,23 @@ public class Player implements Displayable {
 		return toRender;
 	}
 	
-
+	public void updatePlayer(Maze maze,String input){
+		if(input.equals("UP")){
+			if(!maze.isWall(x - 1, y))
+				x -= 1;
+		} 
+		else if (input.equals("DOWN")){
+			if(!maze.isWall(x + 1, y))
+				x += 1;
+		}
+		else if (input.equals("LEFT")){
+			if(!maze.isWall(x, y - 1))
+				y -= 1;
+		}
+		else if (input.equals("RIGHT")){
+			if(!maze.isWall(x, y + 1))
+				y += 1;
+		}
+	}
 	
 }
