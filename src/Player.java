@@ -25,8 +25,8 @@ public class Player implements Displayable {
 		x = _x;
 	}
 	
-	public void setY(int _x) {
-		x = _x;
+	public void setY(int _y) {
+		x = _y;
 	}
 	@Override
 	public String getImagePath() {
