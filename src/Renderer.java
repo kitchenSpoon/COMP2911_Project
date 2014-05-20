@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -55,6 +56,10 @@ public class Renderer {
 		JLabel label = new JLabel(image);
 		mazePanel.add(label, c);
 		mazePanel.repaint();
+		
+	}
+	
+	public static void paintComponent(Graphics g) {
 		
 	}
 	

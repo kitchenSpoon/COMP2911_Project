@@ -10,6 +10,7 @@ public class GameManager {
 		Player player = new Player("Jack",1,1);
 		Maze maze = new Maze(11,11);
 		Renderer r = new Renderer();
+		Renderer2 r2 = new Renderer2(maze.getTiles());
 		
 		r.renderAll();
 		
@@ -25,8 +26,9 @@ public class GameManager {
 				input.equals("RIGHT")){
 				player.updatePlayer(maze,input);
 					r.renderAll();
+				r2.updatePlayer(player.getX(), player.getY());
 			}
-			maze.printMaze(player.getX(),player.getY());
+			//maze.printMaze(player.getX(),player.getY());
 			if(checkGame(player,maze)){
 				break;
 			}
