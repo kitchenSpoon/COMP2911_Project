@@ -29,6 +29,5 @@ public class Renderer2 {
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 	}
-		
 	
 }

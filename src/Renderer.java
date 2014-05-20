@@ -1,19 +1,25 @@
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Renderer {
 
-	public final static String IMAGE_PATH = "./images/";
+	public final static String IMAGE_PATH = "../images/";
 	static JPanel mazePanel;
+	static JPanel menuPanel;
 	static GridBagConstraints c;
 	public static ArrayList<Displayable> toBeRendered = new ArrayList<Displayable>();
 	static JFrame mazeFrame;
@@ -21,13 +27,21 @@ public class Renderer {
 	private static String input;
 	
 	public Renderer() {
+		
 		mazePanel = new JPanel();
 		mazePanel.setLayout(new GridBagLayout());
+		menuPanel = new JPanel();
 		c = new GridBagConstraints();
 		mazePanel.setVisible(true);
 		c.fill = GridBagConstraints.BOTH;	
+		
 		mazeFrame = new JFrame();
+		//menu();
 		generate();
+	}
+	
+	public void disposeRenderer() {
+		mazeFrame.dispose();
 	}
 	
 	public static void addToRenderer(Displayable object){
@@ -63,11 +77,38 @@ public class Renderer {
 		
 	}
 	
+	public static void menu() {
+		
+		JButton newMazeButton = new JButton("New Maze");
+		newMazeButton.addActionListener(new 
+			ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					//mazePanel.repaint();
+				}			
+			}
+		);
+		
+		JButton resetPlayerButton = new JButton("Reset Game");
+		resetPlayerButton.addActionListener(new 
+			ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					//mazePanel.repaint();
+				}			
+			}
+		);
+		
+		menuPanel.add(newMazeButton);
+		menuPanel.add(resetPlayerButton);
+		
+	}
+	
 	public static void generate() {
 		
 		mazeFrame.addKeyListener(InputReceiver);
 		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mazeFrame.add(mazePanel);
+		//mazeFrame.add(mazePanel, BorderLayout.CENTER);
+		mazeFrame.add(menuPanel, BorderLayout.NORTH);
+		mazeFrame.setSize(200, 200);
 		mazeFrame.pack();
 		mazeFrame.setVisible(true);
 	}

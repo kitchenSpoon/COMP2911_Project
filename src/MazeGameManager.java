@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class MazeGameManager {
 	
 	public final static int WIN = 1;
+	
 	static JFrame frame;
 	static JPanel menuPanel;
 	static Player player;
@@ -20,11 +21,11 @@ public class MazeGameManager {
 	static StatusPopup popup;
 	static String input;
 	
-	public static void main(String[] args){
+	public static void startGame () {
 		gameLoop();
 	}
 	
-	public static void gameLoop(){
+	private static void gameLoop(){
 	
 		frame = new JFrame ("Maze of Doom");
 		menuPanel = new JPanel();
@@ -78,7 +79,15 @@ public class MazeGameManager {
 		newMazeButton.addActionListener(new 
 			ActionListener() {
 				public void actionPerformed(ActionEvent event) {
-				
+					r.disposeRenderer();
+					frame.dispose();
+					maze = new Maze(11, 11);
+					frame = new JFrame ("Maze of Doom");
+					frame.add(menuPanel, BorderLayout.NORTH);
+					player = new Player ("Jack", 1, 1);
+					r2 = new Renderer2(maze.getTiles(), frame);
+					r = new Renderer();
+					r.renderAll();
 				}			
 			}
 		);
@@ -98,5 +107,6 @@ public class MazeGameManager {
 		menuPanel.add(resetPlayerButton);
 		
 	}
+
 	
 }
