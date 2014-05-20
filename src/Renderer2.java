@@ -12,16 +12,14 @@ public class Renderer2 {
 
 	private MazePanel mazePanel;
 	private JFrame frame;
-	private JPanel menuPanel;
 	
-	public Renderer2(ArrayList<ArrayList<MazeNode>> mazeTiles) {
+	public Renderer2(ArrayList<ArrayList<MazeNode>> mazeTiles, JFrame _frame) {
+		frame = _frame;
 		mazePanel = new MazePanel(mazeTiles, 1, 1);
-		menuPanel = new JPanel();
-		menu();
-		frame = new JFrame("Maze of Doom");
+		//frame = new JFrame("Maze of Doom");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
-		frame.add(menuPanel, BorderLayout.NORTH);
+		
 		frame.setSize(250, 300);
 		frame.setVisible(true);
 	}
@@ -31,31 +29,6 @@ public class Renderer2 {
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 	}
-	
-	public void menu() {
 		
-		JButton newMazeButton = new JButton("New Maze");
-		newMazeButton.addActionListener(new 
-			ActionListener() {
-				public void actionPerformed(ActionEvent event) {
-				
-				}			
-			}
-		);
-		
-		JButton resetPlayerButton = new JButton("Reset Game");
-		resetPlayerButton.addActionListener(new 
-			ActionListener() {
-				public void actionPerformed(ActionEvent event) {
-					//mazePanel.repaint();
-				}			
-			}
-		);
-		
-		menuPanel.add(newMazeButton);
-		menuPanel.add(resetPlayerButton);
-		
-	}
-	
 	
 }
