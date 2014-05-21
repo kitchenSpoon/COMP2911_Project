@@ -12,7 +12,7 @@ public class MazeGameManager {
 	
 	public final static int WIN = 1;
 	
-	static JFrame frame;
+	//static JFrame frame;
 	static JPanel menuPanel;
 	static Player player;
 	static Maze maze;
@@ -21,23 +21,30 @@ public class MazeGameManager {
 	static StatusPopup popup;
 	static String input;
 	
-	public static void startGame () {
+	private JFrame frame;
+	
+	public MazeGameManager(JFrame _frame){
+		frame = _frame;
+	}
+	
+	public void startGame () {
+		//frame = new JFrame ("Maze of Doom");
+				menuPanel = new JPanel();
+				menu();
+				player = new Player ("Jack", 1, 1);
+				maze = new Maze(11,11);
+				r = new Renderer();
+				popup = new StatusPopup();
+				frame.add(menuPanel, BorderLayout.NORTH);	
+				
+				r2 = new Renderer2(maze.getTiles(), frame);
+				r.renderAll();
 		gameLoop();
 	}
 	
-	private static void gameLoop(){
+	private void gameLoop(){
 	
-		frame = new JFrame ("Maze of Doom");
-		menuPanel = new JPanel();
-		menu();
-		player = new Player ("Jack", 1, 1);
-		maze = new Maze(11,11);
-		r = new Renderer();
-		popup = new StatusPopup();
-		frame.add(menuPanel, BorderLayout.NORTH);	
 		
-		r2 = new Renderer2(maze.getTiles(), frame);
-		r.renderAll();
 		
 		//r.generate();
 		// Debugging InputReceiver
@@ -61,9 +68,10 @@ public class MazeGameManager {
 		popup.updateStatus(WIN);
 		System.out.println("You Win!!");
 		
+		
 	}
 	
-	public static boolean checkGame(Player player, Maze maze){
+	public boolean checkGame(Player player, Maze maze){
 		MazeNode end = maze.getEnd();
 		if(player.getX() == end.getX() &&
 			player.getY() == end.getY()){
@@ -73,7 +81,7 @@ public class MazeGameManager {
 	
 	}
 	
-	public static void menu() {
+	public void menu() {
 		
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new 
