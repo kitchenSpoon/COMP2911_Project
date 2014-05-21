@@ -16,6 +16,7 @@ public class GameManager {
 	static JFrame gframe = new JFrame ("Maze of Doom");
 	static JPanel menuPanel = new JPanel();
 	static MazeGameManager mgm1;
+	static KeyInputReceiver key = new KeyInputReceiver();
 	
 	public static void main(String[] args){
 		
@@ -31,6 +32,7 @@ public class GameManager {
 		menu();
 		run();
 	}
+	
 public static void menu() {
 		
 		JButton newMazeButton = new JButton("New Maze");
@@ -40,6 +42,7 @@ public static void menu() {
 					mgm1 = new MazeGameManager();
 					gframe = new JFrame("Game");
 					gframe.add(mgm1);	
+					gframe.addKeyListener(key);
 					//gframe.validate();
 					//gframe.pack();
 					gframe.setSize(350, 350);

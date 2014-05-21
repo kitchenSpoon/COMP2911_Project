@@ -18,6 +18,7 @@ public class MazeGameManager extends JPanel{
 	}	
 	
 	public void paint(Graphics g){
+		super.paint(g);
 		Graphics g2d =(Graphics2D) g;
 		g2d.fillOval(x+0,y+0,30,30);
 		g2d.fillOval(x+100,y+200,30,30);
@@ -25,11 +26,26 @@ public class MazeGameManager extends JPanel{
 	
 	public void loop(){
 		while(true){
-			System.out.println("repainting");
+			if (GameManager.key.input().equals("DOWN")) {
+				y++;
+			}
+			else if (GameManager.key.input().equals("RIGHT")) {
+				x++;
+			}
+			else if (GameManager.key.input().equals("UP")) {
+				y--;
+			}
+			else if (GameManager.key.input().equals("LEFT")) {
+				x--;
+			}
 			validate();
-			//x++;
-			//y++;
-			//repaint();
+			repaint();
+			try {
+				Thread.sleep(50);
+			} 
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 		}
 	}
