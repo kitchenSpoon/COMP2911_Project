@@ -17,8 +17,12 @@ public class GameManager {
 
 		//frame = new JFrame("Maze of Doom");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+		MazeNode n1 = new MazeNode();
+		MazeNode n2 = new MazeNode();
+		JPanel panel = new JPanel();
+		panel.add(n1, 0);
+		panel.add(n1, 2);
+		frame.add(panel, BorderLayout.CENTER);
 		menu(menuPanel);
 		frame.add(menuPanel, BorderLayout.NORTH);	
 		frame.setSize(250, 300);
