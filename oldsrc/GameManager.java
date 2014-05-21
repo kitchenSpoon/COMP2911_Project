@@ -14,10 +14,15 @@ public class GameManager {
 	static JPanel menuPanel = new JPanel();
 	public static void main(String[] args){
 		
+
+		//frame = new JFrame("Maze of Doom");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		menu(menuPanel);
-		mazeGame = new MazeGameManager(frame);
-		mazeGame.startGame();
+		frame.add(menuPanel, BorderLayout.NORTH);	
+		frame.setSize(250, 300);
+		frame.setVisible(true);
 	}
 public static void menu(JPanel menuPanel) {
 		
