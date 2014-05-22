@@ -22,6 +22,7 @@ public class MazeGameManager {
 	private InputReceiver inputReceiver;
 	private MazePanel mazePanel;
 	static boolean resetGame = false;
+	
 	public void startGame() {
 		gameLoop();
 	}
@@ -44,7 +45,9 @@ public class MazeGameManager {
 		frame.setSize(250, 300);
 		frame.setVisible(true);
 		frame.requestFocus();
-		//r2 = new Renderer2(maze.getTiles(), frame);
+		
+		//timer for points
+		long start = System.currentTimeMillis();
 	
 		while (true) {
 			// System.out.println(r.getInput());
@@ -73,8 +76,10 @@ public class MazeGameManager {
 				break;
 			}
 		}
-		popup.updateStatus(WIN);
-		System.out.println("You Win!!");
+		long end = System.currentTimeMillis();
+		double duration = (end - start)/1000.0;
+		popup.winPopupScore(duration);
+		System.out.println("You Win!! You took " + duration);
 
 	}
 

@@ -17,9 +17,12 @@ public class StatusPopup {
 	}
 	
 	private void winPopup () {
-		
 		JOptionPane.showMessageDialog(frame, "You Win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
 		
+	}
+	
+	public void winPopupScore (double duration) {
+		JOptionPane.showMessageDialog(frame, "You Win!, you took " + duration + " seconds", "Congratulations", JOptionPane.PLAIN_MESSAGE);
 	}
 	
 }
