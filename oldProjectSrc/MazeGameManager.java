@@ -16,8 +16,6 @@ public class MazeGameManager {
 	static JPanel menuPanel;
 	static Player player;
 	static Maze maze;
-	//static Renderer r;
-	//static Renderer2 r2;
 	static StatusPopup popup;
 	static String input = "NO MOVE";
 	private InputReceiver inputReceiver;
@@ -64,10 +62,6 @@ public class MazeGameManager {
 		long start = System.currentTimeMillis();
 	
 		while (true) {
-			// System.out.println(r.getInput());
-
-			// input = r.getInput();
-			//input = inputReceiver.input();
 			
 			if (!input.isEmpty()) {
 				if (input.equals("UP") || input.equals("DOWN")
