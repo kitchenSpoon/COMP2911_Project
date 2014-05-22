@@ -37,12 +37,15 @@ public class MazeGameManager {
 		player = new Player("Jack", 1, 1);
 		if (GameManager.difficulty == 0) {
 			maze = new Maze(11, 11);
+			frame.setSize(220, 280);
 		}
 		else if (GameManager.difficulty == 1) {
 			maze = new Maze(21, 21);
+			frame.setSize(420, 480);
 		}
 		else {
 			maze = new Maze(31, 31);
+			frame.setSize(620, 680);
 		}
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
@@ -53,7 +56,7 @@ public class MazeGameManager {
 		frame.add(mazePanel, BorderLayout.CENTER);
 		//frame.setSize(250, 300);
 		//frame.pack();
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.requestFocus();
 		
@@ -91,6 +94,7 @@ public class MazeGameManager {
 		double duration = (end - start)/1000.0;
 		popup.winPopupScore(duration);
 		System.out.println("You Win!! You took " + duration);
+		frame.dispose();
 
 	}
 
@@ -110,8 +114,19 @@ public class MazeGameManager {
 			public void actionPerformed(ActionEvent event) {
 				//r.disposeRenderer();
 				frame.dispose();
-				maze = new Maze(11, 11);
 				frame = new JFrame("Maze of Doom");
+				if (GameManager.difficulty == 0) {
+					maze = new Maze(11, 11);
+					frame.setSize(220, 280);
+				}
+				else if (GameManager.difficulty == 1) {
+					maze = new Maze(21, 21);
+					frame.setSize(420, 480);
+				}
+				else {
+					maze = new Maze(31, 31);
+					frame.setSize(620, 680);
+				}
 				frame.add(menuPanel, BorderLayout.NORTH);
 				player = new Player("Jack", 1, 1);
 				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player);
@@ -119,7 +134,7 @@ public class MazeGameManager {
 				frame.add(mazePanel, BorderLayout.CENTER);
 				frame.addKeyListener(inputReceiver);
 				menuPanel.addKeyListener(inputReceiver);
-				frame.setSize(250, 300);
+				//frame.setSize(250, 300);
 				frame.setVisible(true);
 				frame.requestFocus();
 				//r2 = new Renderer2(maze.getTiles(), frame);
@@ -128,7 +143,7 @@ public class MazeGameManager {
 			}
 		});
 
-		JButton resetPlayerButton = new JButton("Reset Game");
+		JButton resetPlayerButton = new JButton("Restart");
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				player.updatePlayer(maze, "RESET");
