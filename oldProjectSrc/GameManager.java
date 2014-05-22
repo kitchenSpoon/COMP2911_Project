@@ -12,6 +12,7 @@ public class GameManager {
 	private JFrame mainFrame;
 	private MazeGameManager mazeGame;
 	private boolean newGameClicked = false;
+	public static int difficulty;
 
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
@@ -19,6 +20,7 @@ public class GameManager {
 		mainFrame.setSize(300, 400);
 
 		JPanel mainPanel = new JPanel();
+		
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -26,14 +28,26 @@ public class GameManager {
 			}
 		});
 		mainPanel.add(newMazeButton);
+		
+		JButton settingsButton = new JButton("Settings");
+		settingsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				CustomiseMazeGame customise = new CustomiseMazeGame ();
+			}
+		});
+		mainPanel.add(settingsButton);
+		
 		JButton exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				System.exit(0);
 			}
 		});
-	
+		
 		mainPanel.add(exitButton);
+		
+		
+		
 		mainFrame.add(mainPanel);
 		mainFrame.setVisible(true);
 		while (true) {

@@ -70,8 +70,8 @@ public class Player extends Component {
 
 	public void paint(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(x*20, y*20, 20, 20);
-		g.drawRect(x*20, y*20, 20, 20);
+		g.fillRect(x*20, y*20, 19, 19);
+		g.drawRect(x*20, y*20, 19, 19);
 		//g.drawImage(new Image(null),x*20, y*20, null);
 	}
 	

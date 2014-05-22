@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,7 +34,15 @@ public class MazeGameManager {
 		menuPanel = new JPanel();
 		menu();
 		player = new Player("Jack", 1, 1);
-		maze = new Maze(11, 11);
+		if (GameManager.difficulty == 0) {
+			maze = new Maze(11, 11);
+		}
+		else if (GameManager.difficulty == 1) {
+			maze = new Maze(21, 21);
+		}
+		else {
+			maze = new Maze(31, 31);
+		}
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
 		frame.addKeyListener(inputReceiver);
@@ -41,7 +50,9 @@ public class MazeGameManager {
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
-		frame.setSize(250, 300);
+		//frame.setSize(250, 300);
+		//frame.pack();
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.requestFocus();
 		//r2 = new Renderer2(maze.getTiles(), frame);
@@ -75,6 +86,7 @@ public class MazeGameManager {
 		}
 		popup.updateStatus(WIN);
 		System.out.println("You Win!!");
+		frame.dispose();
 
 	}
 
