@@ -12,15 +12,20 @@ public class MazeGameManager {
 
 	public final static int WIN = 1;
 
-	static JFrame frame;
-	static JPanel menuPanel;
-	static Player player;
-	static Maze maze;
-	static StatusPopup popup;
+	JFrame frame;
+	JPanel menuPanel;
+	Player player;
+	Maze maze;
+	StatusPopup popup;
 	static String input = "NO MOVE";
-	private InputReceiver inputReceiver;
-	private MazePanel mazePanel;
-	static boolean resetGame = false;
+	InputReceiver inputReceiver;
+	MazePanel mazePanel;
+	boolean resetGame = false;
+	MazeGameOptions mazeOptions;
+	
+	public MazeGameManager(MazeGameOptions _mazeOptions){
+		mazeOptions = _mazeOptions;
+	}
 	
 	public void startGame() {
 		gameLoop();
@@ -33,11 +38,11 @@ public class MazeGameManager {
 		menuPanel = new JPanel();
 		menu();
 		player = new Player("Jack", 1, 1);
-		if (GameManager.difficulty == 0) {
+		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
 			frame.setSize(220, 280);
 		}
-		else if (GameManager.difficulty == 1) {
+		else if (mazeOptions.getDifficulty() == 1) {
 			maze = new Maze(21, 21);
 			frame.setSize(420, 480);
 		}
@@ -92,7 +97,7 @@ public class MazeGameManager {
 
 	}
 
-	public static boolean checkGame(Player player, Maze maze) {
+	public boolean checkGame(Player player, Maze maze) {
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
 			return true;

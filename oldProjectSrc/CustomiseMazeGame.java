@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,18 +15,32 @@ public class CustomiseMazeGame {
 	public final static int MEDIUM = 1;
 	public final static int HARD = 2;
 	
+	private MazeGameOptions mazeOptions;
+	
 	private JFrame frame;
+	private JPanel container ;
+	
+	
 	//private int difficulty = 0; // default easy difficulty
 	
-	public CustomiseMazeGame () {
+	public CustomiseMazeGame (MazeGameOptions _mazeOptions) {
+		if(mazeOptions == null) {
+			System.out.println("MazeOptions is null");
+		}
+		mazeOptions = _mazeOptions;
+		
+		container = new JPanel();
+		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		
 		frame = new JFrame ("Settings");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 200);
 		
 		initialiseDifficulty();
+		initialiseTreasure();
 		initialiseDone();
 		
+		frame.add(container);
 		frame.setVisible(true);
 		
 	}
@@ -40,7 +55,7 @@ public class CustomiseMazeGame {
 		JButton easyDifficulty = new JButton("Easy");
 		easyDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				GameManager.difficulty = EASY;
+				mazeOptions.setDifficulty(EASY);
 				System.out.println("Easy Game");
 			}
 		});
@@ -49,7 +64,7 @@ public class CustomiseMazeGame {
 		JButton mediumDifficulty = new JButton("Medium");
 		mediumDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				GameManager.difficulty = MEDIUM;
+				mazeOptions.setDifficulty(MEDIUM);
 				System.out.println("Intermediate Game");
 			}
 		});
@@ -58,13 +73,42 @@ public class CustomiseMazeGame {
 		JButton hardDifficulty = new JButton("Hard");
 		hardDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				GameManager.difficulty = HARD;
+				mazeOptions.setDifficulty(HARD);
 				System.out.println("Difficult Game");
 			}
 		});
 		difficultyPanel.add(hardDifficulty);
 	
-		frame.add(difficultyPanel, BorderLayout.NORTH);
+		container.add(difficultyPanel, BorderLayout.NORTH);
+		
+	}
+	
+private void initialiseTreasure() {
+		
+		JPanel treasurePanel = new JPanel ();
+		
+		JLabel treasureLabel = new JLabel ("Choose Treasure availabilty");
+		treasurePanel.add(treasureLabel);
+		
+		JButton noTreasure = new JButton("No Treasure");
+		noTreasure.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasTreasure(false);
+				System.out.println("No Treasure");
+			}
+		});
+		treasurePanel.add(noTreasure);
+		
+		JButton hasTreasure = new JButton("Has Treasure");
+		hasTreasure.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasTreasure(true);
+				System.out.println("has Treasure");
+			}
+		});
+		treasurePanel.add(hasTreasure);
+	
+		container.add(treasurePanel, BorderLayout.SOUTH);
 		
 	}
 	
@@ -78,7 +122,7 @@ public class CustomiseMazeGame {
 			}
 		});
 		donePanel.add(done);
-		frame.add(donePanel, BorderLayout.SOUTH);
+		container.add(donePanel, BorderLayout.SOUTH);
 		
 	}
 	

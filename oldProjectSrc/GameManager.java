@@ -11,6 +11,7 @@ public class GameManager {
 
 	private JFrame mainFrame;
 	private MazeGameManager mazeGame;
+	private MazeGameOptions mazeOptions;
 	private boolean newGameClicked = false;
 	public static int difficulty;
 
@@ -32,7 +33,7 @@ public class GameManager {
 		JButton settingsButton = new JButton("Settings");
 		settingsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				CustomiseMazeGame customise = new CustomiseMazeGame ();
+				CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
 			}
 		});
 		mainPanel.add(settingsButton);
@@ -46,10 +47,12 @@ public class GameManager {
 		
 		mainPanel.add(exitButton);
 		
-		
-		
 		mainFrame.add(mainPanel);
 		mainFrame.setVisible(true);
+		
+		//default maze settings
+		mazeOptions = new MazeGameOptions();
+				
 		while (true) {
 			gameManagerLoop();
 		}
@@ -67,7 +70,7 @@ public class GameManager {
 	}
 	
 	public void startNewGame() {
-		mazeGame = new MazeGameManager();
+		mazeGame = new MazeGameManager(mazeOptions);
 		mazeGame.startGame();
 	}
 }
