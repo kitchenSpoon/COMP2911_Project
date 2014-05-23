@@ -8,6 +8,8 @@ public class MazeGameOptions {
 	
 	public MazeGameOptions(){
 		difficulty = 0;
+		hasTreasure = false;
+		hasMultiplayer = false;
 	}
 	
 	public int getDifficulty() {

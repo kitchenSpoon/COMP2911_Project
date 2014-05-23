@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class MazeGameManager {
 
 	public final static int WIN = 1;
+	private int winner = 0;
 
 	JFrame frame;
 	JPanel menuPanel;
@@ -65,7 +66,10 @@ public class MazeGameManager {
 		
 		if(maze == null) System.out.println("Maze must be initialized before player");
 		player = new Player("Jack", 1, 1,0);
-		player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+		
+		//multiplayer options
+		if(mazeOptions.isHasMultiplayer())
+			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
 		
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
@@ -74,9 +78,6 @@ public class MazeGameManager {
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
-		//frame.setSize(250, 300);
-		//frame.pack();
-		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.requestFocus();
 		
@@ -101,19 +102,22 @@ public class MazeGameManager {
 					input = "NO_MOVE";
 				}
 				
-				if (input.equals("UP2") || input.equals("DOWN2")
-						|| input.equals("LEFT2") || input.equals("RIGHT2")
-						|| input.equals("RESET")) {
-					if (resetGame) {
-						input = "RESET";
-						resetGame = false;
+				//multiplayer options
+				if(mazeOptions.isHasMultiplayer()){
+					if (input.equals("UP2") || input.equals("DOWN2")
+							|| input.equals("LEFT2") || input.equals("RIGHT2")
+							|| input.equals("RESET")) {
+						if (resetGame) {
+							input = "RESET";
+							resetGame = false;
+						}
+						int oldX = player2.getX();
+						int oldY = player2.getY();
+						player2.updatePlayer(maze, input);
+						// r.renderAll();
+						updatePlayer(player2,oldX, oldY);
+						input = "NO_MOVE";
 					}
-					int oldX = player2.getX();
-					int oldY = player2.getY();
-					player2.updatePlayer(maze, input);
-					// r.renderAll();
-					updatePlayer(player2,oldX, oldY);
-					input = "NO_MOVE";
 				}
 			}
 			// maze.printMaze(player.getX(),player.getY());
@@ -124,10 +128,32 @@ public class MazeGameManager {
 		}
 		long end = System.currentTimeMillis();
 		double duration = (end - start)/1000.0;
-		popup.winPopupCustom("You Win!! You took " + duration + "\n"
-				+ "You score " + ((player.getScore() * 10) - duration) + " points. (10 points for every treasure minus the time taken)");
+		
+		String winnerName;
+		double winnerScore;
+		
+		//multiplayer options
+		if(mazeOptions.isHasMultiplayer()){
+			if(winner == 1){
+				winnerName = "Player 1";
+				winnerScore = ((player.getScore() * 10) - duration);
+			} else {
+				winnerName = "Player 2";
+				winnerScore = ((player2.getScore() * 10) - duration);
+			}
+		} else {
+			winnerName = "You";
+			winnerScore = ((player.getScore() * 10) - duration);
+		}
+		
+		
+		popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + "\n"
+							 + winnerName + " score " + winnerScore + 
+							 " points. (10 points for every treasure minus the time taken)");
+		
 		System.out.println("You Win!! You took " + duration + "\n"
-							+ "You score " + ((player.getScore() * 10) - duration) + " points. (10 points for every treasure minus the time taken)");
+							+ "You score " + ((player.getScore() * 10) - duration) + 
+							" points. (10 points for every treasure minus the time taken)");
 		frame.dispose();
 
 	}
@@ -139,10 +165,14 @@ public class MazeGameManager {
 			maze.setTreasure(player.getX(),player.getY(),false);
 			player.setScore(player.getScore() + 1);
 		}
-		if(maze.isTreasure(player2.getX(),player2.getY())){
-			System.out.println("Treasure");
-			maze.setTreasure(player2.getX(),player2.getY(),false);
-			player2.setScore(player2.getScore() + 1);
+		
+		//multiplayer options
+		if(mazeOptions.isHasMultiplayer()){
+			if(maze.isTreasure(player2.getX(),player2.getY())){
+				System.out.println("Treasure");
+				maze.setTreasure(player2.getX(),player2.getY(),false);
+				player2.setScore(player2.getScore() + 1);
+			}
 		}
 	}
 	
@@ -150,10 +180,16 @@ public class MazeGameManager {
 		MazeNode start = maze.getStart();
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
+			winner = 1;
 			return true;
 		}
-		if (player2.getX() == start.getX() && player2.getY() == start.getY()) {
-			return true;
+		
+		//multiplayer options
+		if(mazeOptions.isHasMultiplayer()){
+			if (player2.getX() == start.getX() && player2.getY() == start.getY()) {
+				winner = 2;
+				return true;
+			}
 		}
 		return false;
 	}
@@ -163,35 +199,26 @@ public class MazeGameManager {
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//r.disposeRenderer();
 				frame.dispose();
 				frame = new JFrame("Maze of Doom");
-				if (GameManager.difficulty == 0) {
-					maze = new Maze(11, 11);
-					frame.setSize(220, 280);
-				}
-				else if (GameManager.difficulty == 1) {
-					maze = new Maze(21, 21);
-					frame.setSize(420, 480);
-				}
-				else {
-					maze = new Maze(31, 31);
-					frame.setSize(620, 680);
-				}
-				frame.add(menuPanel, BorderLayout.NORTH);
+				
+				checkGameOptions(frame);
+				
+				if(maze == null) System.out.println("Maze must be initialized before player");
 				player = new Player("Jack", 1, 1,0);
-				player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+				
+				//multiplayer options
+				if(mazeOptions.isHasMultiplayer())
+					player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+				
+				frame.add(menuPanel, BorderLayout.NORTH);
 				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player,player2);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.add(mazePanel, BorderLayout.CENTER);
 				frame.addKeyListener(inputReceiver);
 				menuPanel.addKeyListener(inputReceiver);
-				//frame.setSize(250, 300);
 				frame.setVisible(true);
 				frame.requestFocus();
-				//r2 = new Renderer2(maze.getTiles(), frame);
-			//	r = new Renderer();
-				// r.renderAll();
 			}
 		});
 
@@ -199,9 +226,14 @@ public class MazeGameManager {
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				player.updatePlayer(maze, "RESET");
-				player2.updatePlayer(maze, "RESET");
 				updatePlayer(player,player.getX(), player.getY());
-				updatePlayer(player2,player2.getX(), player2.getY());
+				
+				//multiplayer options
+				if(mazeOptions.isHasMultiplayer()){
+					player2.updatePlayer(maze, "RESET");
+					updatePlayer(player2,player2.getX(), player2.getY());
+				}
+				
 				frame.requestFocus();
 			}
 		});

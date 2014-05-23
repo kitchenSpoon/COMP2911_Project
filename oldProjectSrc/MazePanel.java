@@ -76,7 +76,10 @@ public class MazePanel extends JPanel {
 				mn.paint(g);
 			}
 		}
-		player.paint(g);
-		player2.paint(g);
+		if(player != null)
+			player.paint(g);
+		
+		if(player2 != null)
+			player2.paint(g);
 	}
 }
