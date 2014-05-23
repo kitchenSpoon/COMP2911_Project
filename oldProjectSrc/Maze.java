@@ -181,13 +181,22 @@ public class Maze {
 				}
 			}
 		}
-//		
-//		JFrame mazeFrame = new JFrame();
-//		mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		mazeFrame.add(mazePanel);
-//		mazeFrame.pack();
-//		mazeFrame.setVisible(true);
-		
+	}
+	
+	public void generateTreasure(){
+		//maze should already be generated
+		int numTreasure = (height * width)/20;
+		int treasureCount = 0;
+		Random random = new Random();
+		while(treasureCount < numTreasure){
+			int x = random.nextInt(height);
+			int y = random.nextInt(width);
+			System.out.println(x+" "+y);
+			if(!tiles[x][y].isWall() && !tiles[x][y].isTreasure()) {
+				tiles[x][y].setTreasure(true);
+				treasureCount++;
+			}
+		}
 	}
 	
 
@@ -205,6 +214,8 @@ public class Maze {
 					type = 'E';	
 				else if(tiles[i][j].isWall() == true)
 					type = '#';
+				else if(tiles[i][j].isTreasure() == true)
+					type = 'G';
 				
 				System.out.print(type);
 			}

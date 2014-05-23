@@ -30,14 +30,7 @@ public class MazeGameManager {
 	public void startGame() {
 		gameLoop();
 	}
-
-	private void gameLoop() {
-
-		inputReceiver = new InputReceiver();
-		frame = new JFrame("Maze of Doom");
-		menuPanel = new JPanel();
-		menu();
-		player = new Player("Jack", 1, 1);
+	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
 			frame.setSize(220, 280);
@@ -50,6 +43,26 @@ public class MazeGameManager {
 			maze = new Maze(31, 31);
 			frame.setSize(620, 680);
 		}
+	}
+	public void checkTreasure(JFrame frame){
+		if (mazeOptions.isHasTreasure() == true) {
+			maze.generateTreasure();
+		}
+	}
+	public void checkGameOptions(JFrame frame){
+		checkDifficulty(frame);
+		checkTreasure(frame);
+	}
+	private void gameLoop() {
+
+		inputReceiver = new InputReceiver();
+		frame = new JFrame("Maze of Doom");
+		menuPanel = new JPanel();
+		menu();
+		player = new Player("Jack", 1, 1);
+		
+		checkGameOptions(frame);
+		
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
 		frame.addKeyListener(inputReceiver);

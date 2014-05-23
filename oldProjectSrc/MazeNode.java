@@ -6,7 +6,7 @@ import java.awt.Image;
 
 public class MazeNode extends Component {
 	int x,y;
-	boolean isWall, isStart, isEnd, toRender;
+	boolean isWall, isTreasure, isStart, isEnd, toRender;
 	private Sprite sprite;
 	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd){
 		x = _x;
@@ -24,9 +24,10 @@ public class MazeNode extends Component {
 			g.setColor(Color.BLACK);
 		else if (isStart)
 			g.setColor(Color.GREEN);
-			
 		else if (isEnd)
 			g.setColor(Color.RED);
+		else if (isTreasure)
+			g.setColor(Color.YELLOW);
 		else 
 			g.setColor(Color.WHITE);
 		
@@ -62,6 +63,12 @@ public class MazeNode extends Component {
 	}
 	public boolean isEnd() {
 		return isEnd;
+	}
+	public boolean isTreasure(){
+		return isTreasure;
+	}
+	public void setTreasure(boolean _isTreasure){
+		isTreasure = _isTreasure;
 	}
 
 	public String getImagePath() {
