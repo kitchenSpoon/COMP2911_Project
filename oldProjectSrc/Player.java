@@ -12,7 +12,8 @@ public class Player extends Component {
 	private String name;
 	private double score;
 	boolean toRender;
-	public Player(String n, int _xStart, int _yStart) {
+	private int colour;
+	public Player(String n, int _xStart, int _yStart,int _colour) {
 		x = _xStart;
 		y = _yStart;
 		xStart = _xStart;
@@ -20,6 +21,7 @@ public class Player extends Component {
 		name = n;
 		toRender = true;
 		score = 0;
+		colour = _colour;
 		//Renderer.addToRenderer(this);
 	}
 	@Override
@@ -56,19 +58,19 @@ public class Player extends Component {
 	
 	
 	public void updatePlayer(Maze maze,String input){
-		if(input.equals("LEFT")){
+		if(input.equals("LEFT") || input.equals("LEFT2")){
 			if(!maze.isWall(x - 1, y))
 				x -= 1;
 		} 
-		else if (input.equals("RIGHT")){
+		else if (input.equals("RIGHT") || input.equals("RIGHT2")){
 			if(!maze.isWall(x + 1, y))
 				x += 1;
 		}
-		else if (input.equals("UP")){
+		else if (input.equals("UP") || input.equals("UP2")){
 			if(!maze.isWall(x, y - 1))
 				y -= 1;
 		}
-		else if (input.equals("DOWN")){
+		else if (input.equals("DOWN") || input.equals("DOWN2")){
 			if(!maze.isWall(x, y + 1))
 				y += 1;
 		}
@@ -79,7 +81,10 @@ public class Player extends Component {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Color.BLUE);
+		if(colour == 0)
+			g.setColor(Color.BLUE);
+		else
+			g.setColor(Color.cyan);
 		g.fillRect(x*20, y*20, 19, 19);
 		g.drawRect(x*20, y*20, 19, 19);
 		//g.drawImage(new Image(null),x*20, y*20, null);

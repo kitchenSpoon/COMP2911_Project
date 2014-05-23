@@ -31,6 +31,10 @@ public class Maze {
 		return end;
 	}
 	
+	public MazeNode getStart(){
+		return start;
+	}
+	
 	/**
 	 * Start maze filled with walls
 	 */
@@ -132,6 +136,14 @@ public class Maze {
 	
 	public void setTreasure(int x, int y, boolean val){
 		tiles[x][y].setTreasure(val);
+	}
+	
+	public int getHeight(){
+		return height;
+	}
+	
+	public int getWidth(){
+		return width;
 	}
 	
 	/**

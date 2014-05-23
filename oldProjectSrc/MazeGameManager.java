@@ -15,6 +15,7 @@ public class MazeGameManager {
 	JFrame frame;
 	JPanel menuPanel;
 	Player player;
+	Player player2;
 	Maze maze;
 	StatusPopup popup;
 	static String input = "NO MOVE";
@@ -59,15 +60,18 @@ public class MazeGameManager {
 		frame = new JFrame("Maze of Doom");
 		menuPanel = new JPanel();
 		menu();
-		player = new Player("Jack", 1, 1);
 		
 		checkGameOptions(frame);
+		
+		if(maze == null) System.out.println("Maze must be initialized before player");
+		player = new Player("Jack", 1, 1,0);
+		player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
 		
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
 		frame.addKeyListener(inputReceiver);
 		menuPanel.addKeyListener(inputReceiver);
-		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player);
+		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
 		//frame.setSize(250, 300);
@@ -93,7 +97,22 @@ public class MazeGameManager {
 					int oldY = player.getY();
 					player.updatePlayer(maze, input);
 					// r.renderAll();
-					updatePlayer(oldX, oldY);
+					updatePlayer(player,oldX, oldY);
+					input = "NO_MOVE";
+				}
+				
+				if (input.equals("UP2") || input.equals("DOWN2")
+						|| input.equals("LEFT2") || input.equals("RIGHT2")
+						|| input.equals("RESET")) {
+					if (resetGame) {
+						input = "RESET";
+						resetGame = false;
+					}
+					int oldX = player2.getX();
+					int oldY = player2.getY();
+					player2.updatePlayer(maze, input);
+					// r.renderAll();
+					updatePlayer(player2,oldX, oldY);
 					input = "NO_MOVE";
 				}
 			}
@@ -123,8 +142,12 @@ public class MazeGameManager {
 	}
 	
 	public boolean checkGame(Player player, Maze maze) {
+		MazeNode start = maze.getStart();
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
+			return true;
+		}
+		if (player2.getX() == start.getX() && player2.getY() == start.getY()) {
 			return true;
 		}
 		return false;
@@ -151,8 +174,9 @@ public class MazeGameManager {
 					frame.setSize(620, 680);
 				}
 				frame.add(menuPanel, BorderLayout.NORTH);
-				player = new Player("Jack", 1, 1);
-				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player);
+				player = new Player("Jack", 1, 1,0);
+				player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player,player2);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.add(mazePanel, BorderLayout.CENTER);
 				frame.addKeyListener(inputReceiver);
@@ -170,7 +194,8 @@ public class MazeGameManager {
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				player.updatePlayer(maze, "RESET");
-				updatePlayer(player.getX(), player.getY());
+				updatePlayer(player,player.getX(), player.getY());
+				updatePlayer(player2,player2.getX(), player2.getY());
 				frame.requestFocus();
 			}
 		});
@@ -180,9 +205,9 @@ public class MazeGameManager {
 
 	}
 	
-	public void updatePlayer(int oldX, int oldY) {
+	public void updatePlayer(Player p, int oldX, int oldY) {
 		
-		mazePanel.moveSquare(oldX, oldY);
+		mazePanel.moveSquare(p,oldX, oldY);
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 		

@@ -14,12 +14,14 @@ public class MazePanel extends JPanel {
 	final int PLAYER = 4;
 	// private MazeSquare player;
 	private Player player;
+	private Player player2;
 	// private ArrayList<MazeSquare> mazeSquares;
 	MazeNode[][] mazeNodes;
 
-	public MazePanel(MazeNode[][] mazeNodesIn, int xStart, int yStart, Player p) {
+	public MazePanel(MazeNode[][] mazeNodesIn, int xStart, int yStart, Player p, Player p2) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		player = p;
+		player2 = p2;
 		// mazeSquares = new ArrayList<MazeSquare>();
 		// player = new MazeSquare(xStart*20, yStart*20, 20, 20, PLAYER);
 		mazeNodes = mazeNodesIn;
@@ -45,12 +47,12 @@ public class MazePanel extends JPanel {
 
 	}
 
-	public void moveSquare(double oldX, double oldY) {
+	public void moveSquare(Player p, double oldX, double oldY) {
 
 		// Current square state, stored as final variables
 		// to avoid repeat invocations of the same methods.
-		int currentX = player.getX();
-		int currentY = player.getY();
+		int currentX = p.getX();
+		int currentY = p.getY();
 
 		int offset = 1;
 		if ((currentX != oldX) || (currentY != oldY)) {
@@ -75,6 +77,6 @@ public class MazePanel extends JPanel {
 			}
 		}
 		player.paint(g);
+		player2.paint(g);
 	}
-
 }

@@ -22,10 +22,21 @@ public class InputReceiver implements KeyListener {
 		else if (key == KeyEvent.VK_KP_RIGHT || key == KeyEvent.VK_RIGHT) {
 			MazeGameManager.input = "RIGHT";
 		}
+		else if (key == KeyEvent.VK_S) {
+			MazeGameManager.input = "DOWN2";
+		}
+		else if (key == KeyEvent.VK_W) {
+			MazeGameManager.input = "UP2";
+		}
+		else if (key == KeyEvent.VK_A) {
+			MazeGameManager.input = "LEFT2";
+		}
+		else if (key == KeyEvent.VK_D) {
+			MazeGameManager.input = "RIGHT2";
+		}
 		else if (key == KeyEvent.VK_ESCAPE) {
 			MazeGameManager.input = "ESCAPE";
 		}		
-			
 	}
 
 	public void keyReleased(KeyEvent e) {
