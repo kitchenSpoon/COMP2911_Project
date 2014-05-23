@@ -117,8 +117,8 @@ public class MazeGameManager {
 				}
 			}
 			// maze.printMaze(player.getX(),player.getY());
-			updateTreasure(player, maze);
-			if (checkGame(player, maze)) {
+			updateTreasure(player, player2, maze);
+			if (checkGame(player, player2, maze)) {
 				break;
 			}
 		}
@@ -132,16 +132,21 @@ public class MazeGameManager {
 
 	}
 
-	public void updateTreasure(Player player, Maze maze) {
+	public void updateTreasure(Player player,Player player2, Maze maze) {
 		System.out.println(player.getX() + " " + player.getY());
 		if(maze.isTreasure(player.getX(),player.getY())){
 			System.out.println("Treasure");
 			maze.setTreasure(player.getX(),player.getY(),false);
 			player.setScore(player.getScore() + 1);
 		}
+		if(maze.isTreasure(player2.getX(),player2.getY())){
+			System.out.println("Treasure");
+			maze.setTreasure(player2.getX(),player2.getY(),false);
+			player2.setScore(player2.getScore() + 1);
+		}
 	}
 	
-	public boolean checkGame(Player player, Maze maze) {
+	public boolean checkGame(Player player,Player player2, Maze maze) {
 		MazeNode start = maze.getStart();
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
@@ -194,6 +199,7 @@ public class MazeGameManager {
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				player.updatePlayer(maze, "RESET");
+				player2.updatePlayer(maze, "RESET");
 				updatePlayer(player,player.getX(), player.getY());
 				updatePlayer(player2,player2.getX(), player2.getY());
 				frame.requestFocus();
