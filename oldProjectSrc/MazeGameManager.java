@@ -98,25 +98,36 @@ public class MazeGameManager {
 				}
 			}
 			// maze.printMaze(player.getX(),player.getY());
+			updateTreasure(player, maze);
 			if (checkGame(player, maze)) {
 				break;
 			}
 		}
 		long end = System.currentTimeMillis();
 		double duration = (end - start)/1000.0;
-		popup.winPopupScore(duration);
-		System.out.println("You Win!! You took " + duration);
+		popup.winPopupCustom("You Win!! You took " + duration + "\n"
+				+ "You score " + ((player.getScore() * 10) - duration) + " points. (10 points for every treasure minus the time taken)");
+		System.out.println("You Win!! You took " + duration + "\n"
+							+ "You score " + ((player.getScore() * 10) - duration) + " points. (10 points for every treasure minus the time taken)");
 		frame.dispose();
 
 	}
 
+	public void updateTreasure(Player player, Maze maze) {
+		System.out.println(player.getX() + " " + player.getY());
+		if(maze.isTreasure(player.getX(),player.getY())){
+			System.out.println("Treasure");
+			maze.setTreasure(player.getX(),player.getY(),false);
+			player.setScore(player.getScore() + 1);
+		}
+	}
+	
 	public boolean checkGame(Player player, Maze maze) {
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
 			return true;
 		}
 		return false;
-
 	}
 
 	public void menu() {

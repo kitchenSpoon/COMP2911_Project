@@ -10,6 +10,7 @@ public class Player extends Component {
 	private int xStart;
 	private int yStart;
 	private String name;
+	private double score;
 	boolean toRender;
 	public Player(String n, int _xStart, int _yStart) {
 		x = _xStart;
@@ -18,6 +19,7 @@ public class Player extends Component {
 		yStart = _yStart;
 		name = n;
 		toRender = true;
+		score = 0;
 		//Renderer.addToRenderer(this);
 	}
 	@Override
@@ -35,6 +37,14 @@ public class Player extends Component {
 	
 	public void setY(int _y) {
 		x = _y;
+	}
+	
+	public double getScore(){
+		return score;
+	}
+	
+	public void setScore(double _score){
+		score = _score;
 	}
 	
 	public String getImagePath() {

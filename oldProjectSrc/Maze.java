@@ -126,6 +126,14 @@ public class Maze {
 		return tiles[x][y].isWall();
 	}
 	
+	public boolean isTreasure(int x, int y){
+		return tiles[x][y].isTreasure();
+	}
+	
+	public void setTreasure(int x, int y, boolean val){
+		tiles[x][y].setTreasure(val);
+	}
+	
 	/**
 	 * Display the maze
 	 */

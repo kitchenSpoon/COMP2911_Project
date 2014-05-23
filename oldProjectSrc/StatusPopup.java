@@ -25,4 +25,9 @@ public class StatusPopup {
 		JOptionPane.showMessageDialog(frame, "You Win!, you took " + duration + " seconds", "Congratulations", JOptionPane.PLAIN_MESSAGE);
 	}
 	
+	public void winPopupCustom (String text) {
+		JOptionPane.showMessageDialog(frame, text, "Congratulations", JOptionPane.PLAIN_MESSAGE);
+	}
+	
+	
 }
