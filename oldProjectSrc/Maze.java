@@ -10,6 +10,8 @@ public class Maze {
 	MazeNode start;
 	MazeNode end;
 	MazeNode currentPosition;
+	ArrayList<MazeNode> treasureList;
+	
 	public Maze(int _height, int _width){
 		height = _height;
 		width = _width;
@@ -20,6 +22,7 @@ public class Maze {
 		currentPosition = start;
 		generateMaze();
 		printMaze();
+		treasureList = new ArrayList<MazeNode>();
 		//displayMaze();
 	}
 	
@@ -214,12 +217,18 @@ public class Maze {
 			System.out.println(x+" "+y);
 			if(!tiles[x][y].isWall() && !tiles[x][y].isTreasure()) {
 				tiles[x][y].setTreasure(true);
+				treasureList.add(tiles[x][y]);
 				treasureCount++;
 			}
 		}
 	}
 	
-
+	public void regenerateTreasure(){
+		//maze should already be generated
+		for(MazeNode treasure : treasureList){
+			treasure.setTreasure(true);
+		}
+	}
 	
 	/**
 	 * For debugging

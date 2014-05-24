@@ -225,12 +225,16 @@ public class MazeGameManager {
 		JButton resetPlayerButton = new JButton("Restart");
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				maze.regenerateTreasure();
+				
 				player.updatePlayer(maze, "RESET");
+				player.setScore(0);
 				updatePlayer(player,player.getX(), player.getY());
 				
 				//multiplayer options
 				if(mazeOptions.isHasMultiplayer()){
 					player2.updatePlayer(maze, "RESET");
+					player2.setScore(0);
 					updatePlayer(player2,player2.getX(), player2.getY());
 				}
 				
