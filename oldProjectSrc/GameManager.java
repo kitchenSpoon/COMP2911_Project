@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,12 +16,15 @@ public class GameManager {
 	private MazeGameManager mazeGame;
 	private MazeGameOptions mazeOptions;
 	private boolean newGameClicked = false;
-	public static int difficulty;
-
+	
+	static PriorityQueue<String> easyScores = new PriorityQueue<String>();
+	static PriorityQueue<String> mediumScores = new PriorityQueue<String>();
+	static PriorityQueue<String> hardScores = new PriorityQueue<String>();
+	
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(200, 200);
+		mainFrame.setSize(200, 250);
 
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -61,6 +65,18 @@ public class GameManager {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(settingsButton, c);
 		
+		JButton highScoresButton = new JButton("High Scores");
+		highScoresButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				Scoreboard scores = new Scoreboard();
+			}
+		});
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 3;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(highScoresButton, c);
+		
 		JButton exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -68,7 +84,7 @@ public class GameManager {
 			}
 		});
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(exitButton, c);
 		

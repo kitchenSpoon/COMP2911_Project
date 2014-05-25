@@ -24,8 +24,11 @@ public class StatusPopup {
 		JOptionPane.showMessageDialog(frame, "You Win!, you took " + duration + " seconds", "Congratulations", JOptionPane.PLAIN_MESSAGE);
 	}
 	
-	public void winPopupCustom (String text) {
-		JOptionPane.showMessageDialog(frame, text, "Congratulations", JOptionPane.PLAIN_MESSAGE);
+	public String winPopupCustom (String text) {
+		//JOptionPane.showMessageDialog(frame, text, "Congratulations", JOptionPane.PLAIN_MESSAGE);
+		String name = JOptionPane.showInputDialog (frame, text + "\n\nEnter your name for the leaderboard:", "Congratulations", JOptionPane.PLAIN_MESSAGE); 
+		System.out.println("Name: " + name);
+		return name;
 	}
 	
 	

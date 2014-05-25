@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ public class MazeGameManager {
 	boolean resetGame = false;
 	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
+	PriorityQueue<String> scores;
 	
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
@@ -44,15 +46,18 @@ public class MazeGameManager {
 		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
 			frame.setSize(220, 345);
+			scores = GameManager.easyScores;
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
 			//maze = new Maze(21, 21);
 			maze = new Maze(19, 19);
 			frame.setSize(420, 545);
+			scores = GameManager.mediumScores;
 		}
 		else {
 			maze = new Maze(31, 31);
 			frame.setSize(620, 745);
+			scores = GameManager.hardScores;
 		}
 	}
 	public void checkTreasure(JFrame frame){
@@ -167,10 +172,12 @@ public class MazeGameManager {
 				winnerScore = ((player.getScore() * 10) - duration);
 			}
 			
-			
-			popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + " seconds\n"
+			String playerName = popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + " seconds\n"
 								 + winnerName + " score " + winnerScore + 
 								 " points. (10 points for every treasure minus the time taken)");
+			
+			
+			scores.add(winnerScore + " " + playerName);
 			
 			System.out.println("You Win!! You took " + duration + " seconds\n"
 								+ "You score " + ((player.getScore() * 10) - duration) + 
