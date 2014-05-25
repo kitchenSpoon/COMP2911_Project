@@ -34,9 +34,17 @@ public class MazeGameManager {
 	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
 	PriorityQueue<String> scores;
-	
+	public static ImageStore mazeImages = new ImageStore();
+	int themeReference;
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
+		mazeImages.add("./images/end80.tif", "END");
+		mazeImages.add("./images/path80.tif", "PATH");
+		mazeImages.add("./images/wall80.tif", "WALL");
+		mazeImages.add("./images/player80.tif", "PLAYER");
+		mazeImages.add("./images/start80.tif", "START");
+		mazeImages.add("./images/coin20.png", "COIN");
+		
 	}
 	
 	public void startGame() {
