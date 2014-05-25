@@ -3,10 +3,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 
 public class CustomiseMazeGame {
@@ -52,32 +54,38 @@ public class CustomiseMazeGame {
 		
 		JLabel difficultyLabel = new JLabel ("Choose difficulty level");
 		difficultyPanel.add(difficultyLabel);
+		ButtonGroup diffButtonGroup = new ButtonGroup();
 		
-		JButton easyDifficulty = new JButton("Easy");
+		JToggleButton easyDifficulty = new JToggleButton("Easy");
 		easyDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setDifficulty(EASY);
 				System.out.println("Easy Game");
 			}
 		});
+		diffButtonGroup.add(easyDifficulty);
 		difficultyPanel.add(easyDifficulty);
 		
-		JButton mediumDifficulty = new JButton("Medium");
+		JToggleButton mediumDifficulty = new JToggleButton("Medium");
 		mediumDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setDifficulty(MEDIUM);
 				System.out.println("Intermediate Game");
 			}
 		});
+		diffButtonGroup.add(mediumDifficulty);
+
 		difficultyPanel.add(mediumDifficulty);
 		
-		JButton hardDifficulty = new JButton("Hard");
+		JToggleButton hardDifficulty = new JToggleButton("Hard");
 		hardDifficulty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setDifficulty(HARD);
 				System.out.println("Difficult Game");
 			}
 		});
+		diffButtonGroup.add(hardDifficulty);
+
 		difficultyPanel.add(hardDifficulty);
 	
 		container.add(difficultyPanel, BorderLayout.NORTH);
@@ -90,8 +98,8 @@ public class CustomiseMazeGame {
 		
 		JLabel treasureLabel = new JLabel ("Choose Treasure availabilty");
 		treasurePanel.add(treasureLabel);
-		
-		JButton noTreasure = new JButton("No Treasure");
+		ButtonGroup treasureButtonGroup = new ButtonGroup();
+		JToggleButton noTreasure = new JToggleButton("No Treasure");
 		noTreasure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setHasTreasure(false);
@@ -99,14 +107,16 @@ public class CustomiseMazeGame {
 			}
 		});
 		treasurePanel.add(noTreasure);
+		treasureButtonGroup.add(noTreasure);
 		
-		JButton hasTreasure = new JButton("Has Treasure");
+		JToggleButton hasTreasure = new JToggleButton("Has Treasure");
 		hasTreasure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setHasTreasure(true);
 				System.out.println("has Treasure");
 			}
 		});
+		treasureButtonGroup.add(hasTreasure);
 		treasurePanel.add(hasTreasure);
 	
 		container.add(treasurePanel, BorderLayout.SOUTH);
@@ -119,23 +129,25 @@ public class CustomiseMazeGame {
 		
 		JLabel multiplayerLabel = new JLabel ("Choose Multiplayer mode");
 		multiplayerPanel.add(multiplayerLabel);
-		
-		JButton singleplayer = new JButton("Single Player");
-		singleplayer.addActionListener(new ActionListener() {
+		ButtonGroup playerButtonGroup = new ButtonGroup();
+		JToggleButton singlePlayer = new JToggleButton("Single Player");
+		singlePlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setHasMultiplayer(false);
 				System.out.println("Single Player");
 			}
 		});
-		multiplayerPanel.add(singleplayer);
+		playerButtonGroup.add(singlePlayer);
+		multiplayerPanel.add(singlePlayer);
 		
-		JButton multiplayer = new JButton("Multiplayer");
+		JToggleButton multiplayer = new JToggleButton("Multiplayer");
 		multiplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				mazeOptions.setHasMultiplayer(true);
 				System.out.println("Multiplayer");
 			}
 		});
+		playerButtonGroup.add(multiplayer);
 		multiplayerPanel.add(multiplayer);
 	
 		container.add(multiplayerPanel, BorderLayout.SOUTH);
