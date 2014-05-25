@@ -24,8 +24,8 @@ public class Player extends Component {
 		toRender = true;
 		score = 0;
 		colour = _colour;
-		height = 10;
-		width = 10;
+		height = 20;
+		width = 20;
 		//Renderer.addToRenderer(this);
 	}
 	@Override

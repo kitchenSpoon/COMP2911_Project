@@ -15,8 +15,8 @@ public class MazeNode extends Component {
 		isStart = _isStart;
 		isEnd = _isEnd;
 		toRender = true;
-		height = 10;
-		width = 10;
+		height = 20;
+		width = 20;
 		//sprite = new Sprite(spriteImage);
 		
 	}

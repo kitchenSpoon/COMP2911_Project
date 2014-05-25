@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -25,6 +26,7 @@ public class MazeGameManager {
 	InputReceiver inputReceiver;
 	MazePanel mazePanel;
 	JPanel scorePanel;
+	JTextArea scoreText;
 	boolean resetGame = false;
 	MazeGameOptions mazeOptions;
 	
@@ -38,15 +40,15 @@ public class MazeGameManager {
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
-			frame.setSize(220, 280);
+			frame.setSize(220, 330);
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
 			maze = new Maze(21, 21);
-			frame.setSize(420, 480);
+			frame.setSize(420, 530);
 		}
 		else {
 			maze = new Maze(31, 31);
-			frame.setSize(620, 680);
+			frame.setSize(620, 730);
 		}
 	}
 	public void checkTreasure(JFrame frame){
@@ -82,9 +84,9 @@ public class MazeGameManager {
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
 		
 		scorePanel = new JPanel();
-		JTextArea scoreText = new JTextArea("Score: " + player.getScore());
+		scoreText = new JTextArea("Score: " + player.getScore());
 		scorePanel.add(scoreText);
-		frame.add(scorePanel, BorderLayout.SOUTH);
+		frame.add(scorePanel, BorderLayout.SOUTH);	
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
@@ -97,10 +99,12 @@ public class MazeGameManager {
 		while (true) {
 			
 			if (!input.isEmpty()) {
+				
 				long end = System.currentTimeMillis();
 				double duration = (end - start)/1000.0;
-				double scoreValue = ((player.getScore() * 10) - duration);
-				scoreText.setText("Score: " + scoreValue);
+				DecimalFormat df = new DecimalFormat("#.00");
+				scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
+				                  "Treasure collected: " + (int) player.getScore());
 				
 				if (input.equals("UP") || input.equals("DOWN")
 						|| input.equals("LEFT") || input.equals("RIGHT")
@@ -257,6 +261,14 @@ public class MazeGameManager {
 			}
 		});
 
+		JButton mainMenuButton = new JButton("Main Menu");
+		mainMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				
+			}
+		});
+		
+		
 		menuPanel.add(newMazeButton);
 		menuPanel.add(resetPlayerButton);
 
