@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -25,9 +27,10 @@ public class MazeGameManager {
 	static String input = "NO MOVE";
 	InputReceiver inputReceiver;
 	MazePanel mazePanel;
-	JPanel scorePanel;
 	JTextArea scoreText;
+	JPanel bottomPanel;
 	boolean resetGame = false;
+	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
 	
 	public MazeGameManager(MazeGameOptions _mazeOptions){
@@ -40,15 +43,16 @@ public class MazeGameManager {
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
-			frame.setSize(220, 330);
+			frame.setSize(220, 345);
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
-			maze = new Maze(21, 21);
-			frame.setSize(420, 530);
+			//maze = new Maze(21, 21);
+			maze = new Maze(19, 19);
+			frame.setSize(420, 545);
 		}
 		else {
 			maze = new Maze(31, 31);
-			frame.setSize(620, 730);
+			frame.setSize(620, 745);
 		}
 	}
 	public void checkTreasure(JFrame frame){
@@ -65,7 +69,7 @@ public class MazeGameManager {
 		inputReceiver = new InputReceiver();
 		frame = new JFrame("Maze of Doom");
 		menuPanel = new JPanel();
-		menu();
+		topMenu();
 		
 		checkGameOptions(frame);
 		
@@ -83,10 +87,7 @@ public class MazeGameManager {
 		menuPanel.addKeyListener(inputReceiver);
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
 		
-		scorePanel = new JPanel();
-		scoreText = new JTextArea("Score: " + player.getScore());
-		scorePanel.add(scoreText);
-		frame.add(scorePanel, BorderLayout.SOUTH);	
+		bottomBar();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
@@ -95,8 +96,7 @@ public class MazeGameManager {
 		
 		//timer for points
 		long start = System.currentTimeMillis();
-	
-		while (true) {
+		while (playing) {
 			
 			if (!input.isEmpty()) {
 				
@@ -145,34 +145,37 @@ public class MazeGameManager {
 				break;
 			}
 		}
-		long end = System.currentTimeMillis();
-		double duration = (end - start)/1000.0;
 		
-		String winnerName;
-		double winnerScore;
-		
-		//multiplayer options
-		if(mazeOptions.isHasMultiplayer()){
-			if(winner == 1){
-				winnerName = "Player 1";
-				winnerScore = ((player.getScore() * 10) - duration);
+		if (playing) {
+			long end = System.currentTimeMillis();
+			double duration = (end - start)/1000.0;
+			
+			String winnerName;
+			double winnerScore;
+			
+			//multiplayer options
+			if(mazeOptions.isHasMultiplayer()){
+				if(winner == 1){
+					winnerName = "Player 1";
+					winnerScore = ((player.getScore() * 10) - duration);
+				} else {
+					winnerName = "Player 2";
+					winnerScore = ((player2.getScore() * 10) - duration);
+				}
 			} else {
-				winnerName = "Player 2";
-				winnerScore = ((player2.getScore() * 10) - duration);
+				winnerName = "You";
+				winnerScore = ((player.getScore() * 10) - duration);
 			}
-		} else {
-			winnerName = "You";
-			winnerScore = ((player.getScore() * 10) - duration);
+			
+			
+			popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + " seconds\n"
+								 + winnerName + " score " + winnerScore + 
+								 " points. (10 points for every treasure minus the time taken)");
+			
+			System.out.println("You Win!! You took " + duration + " seconds\n"
+								+ "You score " + ((player.getScore() * 10) - duration) + 
+								" points. (10 points for every treasure minus the time taken)");
 		}
-		
-		
-		popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + "\n"
-							 + winnerName + " score " + winnerScore + 
-							 " points. (10 points for every treasure minus the time taken)");
-		
-		System.out.println("You Win!! You took " + duration + "\n"
-							+ "You score " + ((player.getScore() * 10) - duration) + 
-							" points. (10 points for every treasure minus the time taken)");
 		frame.dispose();
 
 	}
@@ -213,7 +216,7 @@ public class MazeGameManager {
 		return false;
 	}
 
-	public void menu() {
+	public void topMenu() {
 
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
@@ -261,16 +264,32 @@ public class MazeGameManager {
 			}
 		});
 
+		menuPanel.add(newMazeButton);
+		menuPanel.add(resetPlayerButton);
+
+	}
+	
+	public void bottomBar () {
+		
+		bottomPanel = new JPanel (new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		scoreText = new JTextArea();
+		c.gridx = 0;
+		c.gridy = 0;
+		bottomPanel.add(scoreText, c);
+		
 		JButton mainMenuButton = new JButton("Main Menu");
 		mainMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				
+				playing = false;
 			}
 		});
+		c.gridx = 0;
+		c.gridy = 1;
+		bottomPanel.add(mainMenuButton, c);
 		
-		
-		menuPanel.add(newMazeButton);
-		menuPanel.add(resetPlayerButton);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 	}
 	
