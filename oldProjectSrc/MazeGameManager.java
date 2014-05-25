@@ -41,7 +41,7 @@ public class MazeGameManager {
 		mazeImages.add("./images/end80.tif", "END");
 		mazeImages.add("./images/path80.tif", "PATH");
 		mazeImages.add("./images/wall80.tif", "WALL");
-		mazeImages.add("./images/player80.tif", "PLAYER");
+		mazeImages.add("./images/player20.png", "PLAYER");
 		mazeImages.add("./images/start80.tif", "START");
 		mazeImages.add("./images/coin20.png", "COIN");
 		
