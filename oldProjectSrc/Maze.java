@@ -67,8 +67,11 @@ public class Maze {
 		MazeNode curr = null;
 		MazeNode prev = null;
 		
-		toGoBack.add(tiles[1][1]);
-		parent.add(tiles[1][1]);
+		/*toGoBack.add(tiles[1][1]);
+		parent.add(tiles[1][1]);*/
+		
+		toGoBack.add(tiles[height/2][width/2]);
+		parent.add(tiles[height/2][width/2]);
 		
 		while(!toGoBack.isEmpty()){
 			curr = toGoBack.pop();
