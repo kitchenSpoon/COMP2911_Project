@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,9 +20,10 @@ public class GameManager {
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(300, 400);
+		mainFrame.setSize(200, 200);
 
-		JPanel mainPanel = new JPanel();
+		JPanel mainPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
@@ -28,7 +31,23 @@ public class GameManager {
 				newGameClicked = true;
 			}
 		});
-		mainPanel.add(newMazeButton);
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(newMazeButton, c);
+		
+		JButton instructionsButton = new JButton("Instructions");
+		instructionsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				MazeGameInstructions instructions = new MazeGameInstructions();
+			}
+		});
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(instructionsButton, c);
 		
 		JButton settingsButton = new JButton("Settings");
 		settingsButton.addActionListener(new ActionListener() {
@@ -36,7 +55,11 @@ public class GameManager {
 				CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
 			}
 		});
-		mainPanel.add(settingsButton);
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(settingsButton, c);
 		
 		JButton exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
@@ -44,8 +67,10 @@ public class GameManager {
 				System.exit(0);
 			}
 		});
-		
-		mainPanel.add(exitButton);
+		c.gridx = 0;
+		c.gridy = 3;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(exitButton, c);
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setVisible(true);
