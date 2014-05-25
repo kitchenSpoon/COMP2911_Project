@@ -84,7 +84,7 @@ public class CustomiseMazeGame {
 		
 	}
 	
-private void initialiseTreasure() {
+	private void initialiseTreasure() {
 		
 		JPanel treasurePanel = new JPanel ();
 		
@@ -113,34 +113,35 @@ private void initialiseTreasure() {
 		
 	}
 
-private void initialiseMultiplayer() {
+	private void initialiseMultiplayer() {
+		
+		JPanel multiplayerPanel = new JPanel ();
+		
+		JLabel multiplayerLabel = new JLabel ("Choose Multiplayer mode");
+		multiplayerPanel.add(multiplayerLabel);
+		
+		JButton singleplayer = new JButton("Single Player");
+		singleplayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasMultiplayer(false);
+				System.out.println("Single Player");
+			}
+		});
+		multiplayerPanel.add(singleplayer);
+		
+		JButton multiplayer = new JButton("Multiplayer");
+		multiplayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasMultiplayer(true);
+				System.out.println("Multiplayer");
+			}
+		});
+		multiplayerPanel.add(multiplayer);
 	
-	JPanel multiplayerPanel = new JPanel ();
+		container.add(multiplayerPanel, BorderLayout.SOUTH);
+		
+	}
 	
-	JLabel multiplayerLabel = new JLabel ("Choose Multiplayer mode");
-	multiplayerPanel.add(multiplayerLabel);
-	
-	JButton singleplayer = new JButton("Single Player");
-	singleplayer.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent event) {
-			mazeOptions.setHasMultiplayer(false);
-			System.out.println("Single Player");
-		}
-	});
-	multiplayerPanel.add(singleplayer);
-	
-	JButton multiplayer = new JButton("Multiplayer");
-	multiplayer.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent event) {
-			mazeOptions.setHasMultiplayer(true);
-			System.out.println("Multiplayer");
-		}
-	});
-	multiplayerPanel.add(multiplayer);
-
-	container.add(multiplayerPanel, BorderLayout.SOUTH);
-	
-}
 	private void initialiseDone () {
 		
 		JPanel donePanel = new JPanel();

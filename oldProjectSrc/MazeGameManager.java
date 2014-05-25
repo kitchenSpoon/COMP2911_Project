@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class MazeGameManager {
 
@@ -22,6 +24,7 @@ public class MazeGameManager {
 	static String input = "NO MOVE";
 	InputReceiver inputReceiver;
 	MazePanel mazePanel;
+	JPanel scorePanel;
 	boolean resetGame = false;
 	MazeGameOptions mazeOptions;
 	
@@ -74,8 +77,15 @@ public class MazeGameManager {
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
 		frame.addKeyListener(inputReceiver);
+		
 		menuPanel.addKeyListener(inputReceiver);
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
+		
+		scorePanel = new JPanel();
+		JTextArea scoreText = new JTextArea("Score: " + player.getScore());
+		scorePanel.add(scoreText);
+		frame.add(scorePanel, BorderLayout.SOUTH);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
 		frame.setVisible(true);
@@ -87,6 +97,11 @@ public class MazeGameManager {
 		while (true) {
 			
 			if (!input.isEmpty()) {
+				long end = System.currentTimeMillis();
+				double duration = (end - start)/1000.0;
+				double scoreValue = ((player.getScore() * 10) - duration);
+				scoreText.setText("Score: " + scoreValue);
+				
 				if (input.equals("UP") || input.equals("DOWN")
 						|| input.equals("LEFT") || input.equals("RIGHT")
 						|| input.equals("RESET")) {
