@@ -5,7 +5,7 @@ import java.awt.Image;
 
 
 public class MazeNode extends Component {
-	int x,y;
+	int x,y,height,width;
 	boolean isWall, isTreasure, isStart, isEnd, toRender;
 	private Sprite sprite;
 	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd){
@@ -15,6 +15,8 @@ public class MazeNode extends Component {
 		isStart = _isStart;
 		isEnd = _isEnd;
 		toRender = true;
+		height = 10;
+		width = 10;
 		//sprite = new Sprite(spriteImage);
 		
 	}
@@ -31,9 +33,9 @@ public class MazeNode extends Component {
 		else 
 			g.setColor(Color.WHITE);
 		
-		g.fillRect(x*20, y*20, 20, 20);
+		g.fillRect(x*height, y*width, height, width);
 		
-		g.drawRect(x*20, y*20, 20, 20);
+		g.drawRect(x*height, y*width, height, width);
 	}
 	public int getX(){
 		return x;

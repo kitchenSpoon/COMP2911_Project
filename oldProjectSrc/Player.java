@@ -7,6 +7,8 @@ public class Player extends Component {
 
 	private int x;
 	private int y;
+	private int height;
+	private int width;
 	private int xStart;
 	private int yStart;
 	private String name;
@@ -22,6 +24,8 @@ public class Player extends Component {
 		toRender = true;
 		score = 0;
 		colour = _colour;
+		height = 10;
+		width = 10;
 		//Renderer.addToRenderer(this);
 	}
 	@Override
@@ -85,8 +89,8 @@ public class Player extends Component {
 			g.setColor(Color.BLUE);
 		else
 			g.setColor(Color.cyan);
-		g.fillRect(x*20, y*20, 19, 19);
-		g.drawRect(x*20, y*20, 19, 19);
+		g.fillRect(x*height, y*width, height-1, width-1);
+		g.drawRect(x*height, y*width, height-1, width-1);
 		//g.drawImage(new Image(null),x*20, y*20, null);
 	}
 	
