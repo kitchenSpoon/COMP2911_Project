@@ -45,6 +45,7 @@ public class CustomiseMazeGame {
 		
 		frame.add(container);
 		frame.setVisible(true);
+		frame.requestFocus();
 		
 	}
 
@@ -87,7 +88,22 @@ public class CustomiseMazeGame {
 		diffButtonGroup.add(hardDifficulty);
 
 		difficultyPanel.add(hardDifficulty);
-	
+		if (mazeOptions != null) {
+			switch(mazeOptions.getDifficulty()) {
+			case EASY:
+				easyDifficulty.setSelected(true);
+				break;
+			case MEDIUM:
+				mediumDifficulty.setSelected(true);
+				break;
+			case HARD:
+				hardDifficulty.setSelected(true);
+				break;
+			default:
+				break;
+			}
+		}
+		
 		container.add(difficultyPanel, BorderLayout.NORTH);
 		
 	}
@@ -118,7 +134,11 @@ public class CustomiseMazeGame {
 		});
 		treasureButtonGroup.add(hasTreasure);
 		treasurePanel.add(hasTreasure);
-	
+		if (mazeOptions != null && mazeOptions.isHasTreasure()) {
+			hasTreasure.setSelected(true);
+		} else {
+			noTreasure.setSelected(true);
+		}
 		container.add(treasurePanel, BorderLayout.SOUTH);
 		
 	}
@@ -149,7 +169,12 @@ public class CustomiseMazeGame {
 		});
 		playerButtonGroup.add(multiplayer);
 		multiplayerPanel.add(multiplayer);
-	
+
+		if (mazeOptions != null && mazeOptions.isHasMultiplayer()) {
+			multiplayer.setSelected(true);
+		} else {
+			singlePlayer.setSelected(true);
+		}
 		container.add(multiplayerPanel, BorderLayout.SOUTH);
 		
 	}
