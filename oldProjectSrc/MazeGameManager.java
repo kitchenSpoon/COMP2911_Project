@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class MazeGameManager {
-
+	
 	public final static int WIN = 1;
 	private int winner = 0;
 
@@ -109,8 +109,9 @@ public class MazeGameManager {
 		
 		bottomBar();
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
+		frame.setLocation(GameManager.screenWidth/2-frame.getSize().width/2, GameManager.screenHeight/2-frame.getSize().height/2);
 		frame.setVisible(true);
 		frame.requestFocus();
 		
@@ -151,7 +152,7 @@ public class MazeGameManager {
 		
 		//timer for points
 		long start = System.currentTimeMillis();
-		while (playing) {
+		while (playing && frame.isShowing()) {
 			
 			if (!input.isEmpty()) {
 				
@@ -228,7 +229,7 @@ public class MazeGameManager {
 			}
 		}
 		
-		if (playing) {
+		if (playing && frame.isShowing()) {
 			long end = System.currentTimeMillis();
 			double duration = (end - start)/1000.0;
 			
@@ -259,7 +260,7 @@ public class MazeGameManager {
 			System.out.println("You Win!! You took " + duration + " seconds\n"
 								+ "You score " + ((player.getScore() * 10) - duration) + 
 								" points. (10 points for every treasure minus the time taken)");
-		}
+		} 
 		frame.dispose();
 
 	}

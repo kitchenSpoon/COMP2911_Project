@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ public class GameManager {
 	static ArrayList<ScoreNode> easyScores;
 	static ArrayList<ScoreNode> mediumScores;
 	static ArrayList<ScoreNode> hardScores;
-	
+	public final static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public final static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,6 +98,8 @@ public class GameManager {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(exitButton, c);
 		
+		mainFrame.setLocation(screenWidth/2-mainFrame.getSize().width/2, screenHeight/2-mainFrame.getSize().height/2);
+
 		mainFrame.add(mainPanel);
 		mainFrame.setVisible(true);
 		

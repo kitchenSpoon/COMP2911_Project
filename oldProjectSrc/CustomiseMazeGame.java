@@ -43,10 +43,11 @@ public class CustomiseMazeGame {
 		initialiseDone();
 		
 		frame.add(container);
+		frame.setLocation(GameManager.screenWidth/2-frame.getSize().width/2, GameManager.screenHeight/2-frame.getSize().height/2);
 		frame.setVisible(true);
 		frame.requestFocus();
 		
-		while(!submitted) {
+		while(!submitted && frame.isShowing()) {
 			System.out.print("");
 		}
 		
