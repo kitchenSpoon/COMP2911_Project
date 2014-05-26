@@ -28,7 +28,7 @@ public class GameManager {
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(200, 250);
+		mainFrame.setSize(300, 250);
 
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -109,8 +109,7 @@ public class GameManager {
 		while (true) {
 			gameManagerLoop();
 		}
-		
-		
+			
 	}
 	
 	private void initialiseScoreboards () {
@@ -127,7 +126,7 @@ public class GameManager {
 		}
 		mainFrame.setVisible(false);
 		if (settingsClicked) {
-			CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
+			new CustomiseMazeGame(mazeOptions);
 			settingsClicked = false;
 		}
 		else if (newGameClicked) {
