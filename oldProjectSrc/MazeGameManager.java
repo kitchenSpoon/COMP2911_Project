@@ -81,9 +81,12 @@ public class MazeGameManager {
 		checkDifficulty(frame);
 		checkTreasure(frame);
 	}
-	private void gameLoop() {
-
+	
+	private void constructMazeGame() {
 		inputReceiver = new InputReceiver();
+		if (frame != null) {
+			frame.dispose();
+		}
 		frame = new JFrame("Maze of Doom");
 		menuPanel = new JPanel();
 		topMenu();
@@ -110,7 +113,39 @@ public class MazeGameManager {
 		frame.add(mazePanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		frame.requestFocus();
-		
+	}
+	
+	private void gameLoop() {
+
+//		inputReceiver = new InputReceiver();
+//		frame = new JFrame("Maze of Doom");
+//		menuPanel = new JPanel();
+//		topMenu();
+//		
+//		checkGameOptions(frame);
+//		
+//		if(maze == null) System.out.println("Maze must be initialized before player");
+//		player = new Player("Jack", 1, 1,0);
+//		
+//		//multiplayer options
+//		if(mazeOptions.isHasMultiplayer())
+//			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+//		
+//		popup = new StatusPopup(frame);
+//		frame.add(menuPanel, BorderLayout.NORTH);
+//		frame.addKeyListener(inputReceiver);
+//		
+//		menuPanel.addKeyListener(inputReceiver);
+//		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
+//		
+//		bottomBar();
+//		
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.add(mazePanel, BorderLayout.CENTER);
+//		frame.setVisible(true);
+//		frame.requestFocus();
+//		
+		constructMazeGame();
 		//timer for points
 		long start = System.currentTimeMillis();
 		while (playing) {
@@ -267,27 +302,28 @@ public class MazeGameManager {
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				frame.dispose();
-				frame = new JFrame("Maze of Doom");
-				
-				checkGameOptions(frame);
-				
-				if(maze == null) System.out.println("Maze must be initialized before player");
-				player = new Player("Jack", 1, 1,0);
-				
-				//multiplayer options
-				if(mazeOptions.isHasMultiplayer())
-					player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
-				
-				frame.add(menuPanel, BorderLayout.NORTH);
-				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player,player2);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.add(mazePanel, BorderLayout.CENTER);
-				frame.addKeyListener(inputReceiver);
-				menuPanel.addKeyListener(inputReceiver);
-				bottomBar();
-				frame.setVisible(true);
-				frame.requestFocus();
+				constructMazeGame();
+//				frame.dispose();
+//				frame = new JFrame("Maze of Doom");
+//				
+//				checkGameOptions(frame);
+//				
+//				if(maze == null) System.out.println("Maze must be initialized before player");
+//				player = new Player("Jack", 1, 1,0);
+//				
+//				//multiplayer options
+//				if(mazeOptions.isHasMultiplayer())
+//					player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+//				
+//				frame.add(menuPanel, BorderLayout.NORTH);
+//				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player,player2);
+//				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				frame.add(mazePanel, BorderLayout.CENTER);
+//				frame.addKeyListener(inputReceiver);
+//				menuPanel.addKeyListener(inputReceiver);
+//				bottomBar();
+//				frame.setVisible(true);
+//				frame.requestFocus();
 			}
 		});
 
