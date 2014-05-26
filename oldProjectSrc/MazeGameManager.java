@@ -40,11 +40,11 @@ public class MazeGameManager {
 
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
-		mazeImages.add("./images/end80.tif", "END");
-		mazeImages.add("./images/path80.tif", "PATH");
-		mazeImages.add("./images/wall80.tif", "WALL");
+		mazeImages.add("./images/end80.png", "END");
+		mazeImages.add("./images/path80.png", "PATH");
+		mazeImages.add("./images/wall80.png", "WALL");
 		mazeImages.add("./images/player20.png", "PLAYER");
-		mazeImages.add("./images/start80.tif", "START");
+		mazeImages.add("./images/start80.png", "START");
 		mazeImages.add("./images/coin20.png", "COIN");
 		
 	}
