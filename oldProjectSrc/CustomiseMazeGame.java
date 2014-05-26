@@ -47,6 +47,7 @@ public class CustomiseMazeGame {
 		frame.requestFocus();
 		
 		while(!submitted) {
+			System.out.print("");
 		}
 		
 	}
