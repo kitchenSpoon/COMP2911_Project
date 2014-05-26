@@ -17,6 +17,7 @@ public class GameManager {
 	private MazeGameManager mazeGame;
 	private MazeGameOptions mazeOptions;
 	private boolean newGameClicked = false;
+	private boolean settingsClicked = false;
 	
 	static ArrayList<ScoreNode> easyScores;
 	static ArrayList<ScoreNode> mediumScores;
@@ -33,6 +34,7 @@ public class GameManager {
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				System.out.println("NEW MAZE");
 				newGameClicked = true;
 			}
 		});
@@ -57,7 +59,10 @@ public class GameManager {
 		JButton settingsButton = new JButton("Settings");
 		settingsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
+				
+				settingsClicked = true;
+				
+				
 			}
 		});
 		c.weighty = 1;
@@ -113,12 +118,18 @@ public class GameManager {
 	}
 	
 	public void gameManagerLoop() {
-		while (!newGameClicked) {
+		while (!newGameClicked && !settingsClicked) {	
 			System.out.print("");
 		}
 		mainFrame.setVisible(false);
-		newGameClicked = false;
-		startNewGame();
+		if (settingsClicked) {
+			CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
+			settingsClicked = false;
+		}
+		else if (newGameClicked) {
+			newGameClicked = false;
+			startNewGame();
+		}
 		mainFrame.setVisible(true);
 	}
 	
