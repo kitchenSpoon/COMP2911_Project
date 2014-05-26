@@ -57,7 +57,13 @@ public class GameManager {
 		JButton settingsButton = new JButton("Settings");
 		settingsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				//mainFrame.setVisible(false);
 				CustomiseMazeGame customise = new CustomiseMazeGame(mazeOptions);
+				/*
+				if (customise.allDone()) {
+					mainFrame.setVisible(true);
+				}
+				*/
 			}
 		});
 		c.weighty = 1;
@@ -113,7 +119,7 @@ public class GameManager {
 	}
 	
 	public void gameManagerLoop() {
-		while (!newGameClicked) {
+		while (!newGameClicked) {	
 			System.out.print("");
 		}
 		mainFrame.setVisible(false);

@@ -60,8 +60,10 @@ public class MazeGameManager {
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
 			//maze = new Maze(21, 21);
-			maze = new Maze(19, 19);
-			frame.setSize(420, 545);
+			//maze = new Maze(19, 19);
+			//frame.setSize(420, 545);
+			maze = new Maze(23, 23);
+			frame.setSize(460, 585);
 			scores = GameManager.mediumScores;
 		}
 		else {
@@ -283,6 +285,7 @@ public class MazeGameManager {
 				frame.add(mazePanel, BorderLayout.CENTER);
 				frame.addKeyListener(inputReceiver);
 				menuPanel.addKeyListener(inputReceiver);
+				bottomBar();
 				frame.setVisible(true);
 				frame.requestFocus();
 			}

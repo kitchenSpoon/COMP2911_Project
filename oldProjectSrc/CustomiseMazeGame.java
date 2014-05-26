@@ -17,6 +17,8 @@ public class CustomiseMazeGame {
 	public final static int MEDIUM = 1;
 	public final static int HARD = 2;
 	
+	private boolean allDone = false;
+	
 	private MazeGameOptions mazeOptions;
 	
 	private JFrame frame;
@@ -35,7 +37,6 @@ public class CustomiseMazeGame {
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		
 		frame = new JFrame ("Settings");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 200);
 		
 		initialiseDifficulty();
@@ -185,12 +186,18 @@ public class CustomiseMazeGame {
 		JButton done = new JButton("Submit");
 		done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				//allDone = true;
 				frame.dispose();
 			}
 		});
 		donePanel.add(done);
 		container.add(donePanel, BorderLayout.SOUTH);
 		
+	}
+	
+	public boolean allDone () {
+		//frame.dispose();
+		return allDone;
 	}
 	
 }
