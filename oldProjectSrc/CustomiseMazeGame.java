@@ -16,13 +16,11 @@ public class CustomiseMazeGame {
 	public final static int EASY = 0;
 	public final static int MEDIUM = 1;
 	public final static int HARD = 2;
-	
-	private boolean allDone = false;
-	
+	boolean submitted = false;
 	private MazeGameOptions mazeOptions;
 	
 	private JFrame frame;
-	private JPanel container ;
+	private JPanel container;
 	
 	
 	//private int difficulty = 0; // default easy difficulty
@@ -47,6 +45,9 @@ public class CustomiseMazeGame {
 		frame.add(container);
 		frame.setVisible(true);
 		frame.requestFocus();
+		
+		while(!submitted) {
+		}
 		
 	}
 
@@ -186,7 +187,7 @@ public class CustomiseMazeGame {
 		JButton done = new JButton("Submit");
 		done.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				//allDone = true;
+				submitted = true;
 				frame.dispose();
 			}
 		});
@@ -195,9 +196,11 @@ public class CustomiseMazeGame {
 		
 	}
 	
-	public boolean allDone () {
-		//frame.dispose();
-		return allDone;
+	public boolean settingsOpen () {
+		
+		return frame.isVisible();
+		
 	}
+	
 	
 }
