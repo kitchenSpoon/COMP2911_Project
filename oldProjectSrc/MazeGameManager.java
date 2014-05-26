@@ -113,11 +113,8 @@ public class MazeGameManager {
 		frame.add(mazePanel, BorderLayout.CENTER);
 		frame.setVisible(true);
 		frame.requestFocus();
-<<<<<<< HEAD
 		
 		SoundPlayer.playBGSound();
-		
-=======
 	}
 	
 	private void gameLoop() {
