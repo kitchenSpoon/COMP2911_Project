@@ -35,7 +35,6 @@ public class CustomiseMazeGame {
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		
 		frame = new JFrame ("Settings");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 200);
 		
 		initialiseDifficulty();

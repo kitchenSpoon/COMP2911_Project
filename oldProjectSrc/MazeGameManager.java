@@ -109,6 +109,8 @@ public class MazeGameManager {
 		frame.setVisible(true);
 		frame.requestFocus();
 		
+		SoundPlayer.playBGSound();
+		
 		//timer for points
 		long start = System.currentTimeMillis();
 		while (playing) {
@@ -230,6 +232,7 @@ public class MazeGameManager {
 			System.out.println("Treasure");
 			maze.setTreasure(player.getX(),player.getY(),false);
 			player.setScore(player.getScore() + 1);
+			SoundPlayer.playCoinSound();
 		}
 		
 		//multiplayer options
@@ -238,6 +241,7 @@ public class MazeGameManager {
 				System.out.println("Treasure");
 				maze.setTreasure(player2.getX(),player2.getY(),false);
 				player2.setScore(player2.getScore() + 1);
+				SoundPlayer.playCoinSound();
 			}
 		}
 	}
@@ -247,6 +251,7 @@ public class MazeGameManager {
 		MazeNode end = maze.getEnd();
 		if (player.getX() == end.getX() && player.getY() == end.getY()) {
 			winner = 1;
+			SoundPlayer.playWinSound();
 			return true;
 		}
 		
@@ -254,6 +259,7 @@ public class MazeGameManager {
 		if(mazeOptions.isHasMultiplayer()){
 			if (player2.getX() == start.getX() && player2.getY() == start.getY()) {
 				winner = 2;
+				SoundPlayer.playWinSound();
 				return true;
 			}
 		}
