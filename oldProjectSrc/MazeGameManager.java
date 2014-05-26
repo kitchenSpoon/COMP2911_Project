@@ -30,6 +30,7 @@ public class MazeGameManager {
 	MazePanel mazePanel;
 	JTextArea scoreText;
 	JPanel bottomPanel;
+	long start;
 	boolean resetGame = false;
 	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
@@ -117,6 +118,9 @@ public class MazeGameManager {
 		frame.requestFocus();
 		
 		SoundPlayer.playBGSound();
+		
+		start = System.currentTimeMillis();
+		
 	}
 	
 	private void gameLoop() {
@@ -152,16 +156,17 @@ public class MazeGameManager {
 		constructMazeGame();
 		
 		//timer for points
-		long start = System.currentTimeMillis();
+		
 		while (playing && frame.isShowing() && !newGameClicked) {
 			
 			if (!input.isEmpty()) {
 				
 				long end = System.currentTimeMillis();
 				double duration = (end - start)/1000.0;
-				scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
-				                  "Treasure collected: " + (int) player.getScore());
+				
 				if (!mazeOptions.isHasMultiplayer()) {
+					scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
+			                  "Treasure collected: " + (int) player.getScore());
 					if (input.equals("UP") || input.equals("DOWN")
 							|| input.equals("LEFT") || input.equals("RIGHT")
 							|| input.equals("RESET")) {
@@ -177,6 +182,9 @@ public class MazeGameManager {
 						input = "NO_MOVE";
 					}
 				} else {
+					scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
+			                  "P1 Treasure collected: " + (int) player.getScore() + "\n" +
+			                  "P2 Treasure collected: " + (int) player2.getScore());
 					if (input.equals("UP") || input.equals("DOWN")
 							|| input.equals("LEFT") || input.equals("RIGHT")
 							|| input.equals("RESET")) {
@@ -344,6 +352,9 @@ public class MazeGameManager {
 		JButton resetPlayerButton = new JButton("Restart");
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				
+				start = System.currentTimeMillis();
+				
 				maze.regenerateTreasure();
 				
 				player.updatePlayer(maze, "RESET");
