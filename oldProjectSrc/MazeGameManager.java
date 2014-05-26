@@ -119,25 +119,36 @@ public class MazeGameManager {
 				double duration = (end - start)/1000.0;
 				scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
 				                  "Treasure collected: " + (int) player.getScore());
-				
-				if (input.equals("UP") || input.equals("DOWN")
-						|| input.equals("LEFT") || input.equals("RIGHT")
-						|| input.equals("RESET")) {
-					if (resetGame) {
-						input = "RESET";
-						resetGame = false;
+				if (!mazeOptions.isHasMultiplayer()) {
+					if (input.equals("UP") || input.equals("DOWN")
+							|| input.equals("LEFT") || input.equals("RIGHT")
+							|| input.equals("RESET")) {
+						if (resetGame) {
+							input = "RESET";
+							resetGame = false;
+						}
+						int oldX = player.getX();
+						int oldY = player.getY();
+						player.updatePlayer(maze, input);
+						// r.renderAll();
+						updatePlayer(player, oldX, oldY);
+						input = "NO_MOVE";
 					}
-					int oldX = player.getX();
-					int oldY = player.getY();
-					player.updatePlayer(maze, input);
-					// r.renderAll();
-					updatePlayer(player,oldX, oldY);
-					input = "NO_MOVE";
-				}
-				
-				//multiplayer options
-				if(mazeOptions.isHasMultiplayer()){
-					if (input.equals("UP2") || input.equals("DOWN2")
+				} else {
+					if (input.equals("UP") || input.equals("DOWN")
+							|| input.equals("LEFT") || input.equals("RIGHT")
+							|| input.equals("RESET")) {
+						if (resetGame) {
+							input = "RESET";
+							resetGame = false;
+						}
+						int oldX = player.getX();
+						int oldY = player.getY();
+						player.updatePlayer(maze, input);
+						// r.renderAll();
+						updatePlayer(player, oldX, oldY);
+						input = "NO_MOVE";
+					} else if (input.equals("UP2") || input.equals("DOWN2")
 							|| input.equals("LEFT2") || input.equals("RIGHT2")
 							|| input.equals("RESET")) {
 						if (resetGame) {
@@ -148,10 +159,27 @@ public class MazeGameManager {
 						int oldY = player2.getY();
 						player2.updatePlayer(maze, input);
 						// r.renderAll();
-						updatePlayer(player2,oldX, oldY);
+						updatePlayer(player2, oldX, oldY);
 						input = "NO_MOVE";
 					}
 				}
+				//multiplayer options
+//				if(mazeOptions.isHasMultiplayer()){
+//					if (input.equals("UP2") || input.equals("DOWN2")
+//							|| input.equals("LEFT2") || input.equals("RIGHT2")
+//							|| input.equals("RESET")) {
+//						if (resetGame) {
+//							input = "RESET";
+//							resetGame = false;
+//						}
+//						int oldX = player2.getX();
+//						int oldY = player2.getY();
+//						player2.updatePlayer(maze, input);
+//						// r.renderAll();
+//						updatePlayer(player2,oldX, oldY);
+//						input = "NO_MOVE";
+//					}
+//				}
 			}
 			// maze.printMaze(player.getX(),player.getY());
 			updateTreasure(player, player2, maze);
