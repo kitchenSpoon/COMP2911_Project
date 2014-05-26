@@ -33,7 +33,8 @@ public class MazeGameManager {
 	boolean resetGame = false;
 	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
-	PriorityQueue<String> scores;
+	ArrayList<ScoreNode> scores;
+	DecimalFormat df = new DecimalFormat("#.00");
 	
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
@@ -107,7 +108,6 @@ public class MazeGameManager {
 				
 				long end = System.currentTimeMillis();
 				double duration = (end - start)/1000.0;
-				DecimalFormat df = new DecimalFormat("#.00");
 				scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
 				                  "Treasure collected: " + (int) player.getScore());
 				
@@ -176,8 +176,8 @@ public class MazeGameManager {
 								 + winnerName + " score " + winnerScore + 
 								 " points. (10 points for every treasure minus the time taken)");
 			
-			
-			scores.add(winnerScore + " " + playerName);
+			ScoreNode newScore = new ScoreNode(winnerScore, playerName);
+			scores.add(newScore);
 			
 			System.out.println("You Win!! You took " + duration + " seconds\n"
 								+ "You score " + ((player.getScore() * 10) - duration) + 

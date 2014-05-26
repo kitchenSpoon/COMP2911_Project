@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 import javax.swing.JButton;
@@ -17,9 +18,9 @@ public class GameManager {
 	private MazeGameOptions mazeOptions;
 	private boolean newGameClicked = false;
 	
-	static PriorityQueue<String> easyScores = new PriorityQueue<String>();
-	static PriorityQueue<String> mediumScores = new PriorityQueue<String>();
-	static PriorityQueue<String> hardScores = new PriorityQueue<String>();
+	static ArrayList<ScoreNode> easyScores;
+	static ArrayList<ScoreNode> mediumScores;
+	static ArrayList<ScoreNode> hardScores;
 	
 	public GameManager() {
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
@@ -65,6 +66,8 @@ public class GameManager {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(settingsButton, c);
 		
+		initialiseScoreboards();
+		
 		JButton highScoresButton = new JButton("High Scores");
 		highScoresButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -100,6 +103,15 @@ public class GameManager {
 		
 		
 	}
+	
+	private void initialiseScoreboards () {
+		
+		easyScores = new ArrayList<ScoreNode>();
+		mediumScores = new ArrayList<ScoreNode>();
+		hardScores = new ArrayList<ScoreNode>();
+		
+	}
+	
 	public void gameManagerLoop() {
 		while (!newGameClicked) {
 			System.out.print("");
