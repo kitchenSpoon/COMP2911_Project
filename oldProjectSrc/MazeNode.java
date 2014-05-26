@@ -23,19 +23,28 @@ public class MazeNode extends Component {
 	public void paint(Graphics g) {
 		//sprite.draw(g, x, y);
 		if (isWall)
-			g.setColor(Color.BLACK);
+			g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*height, y*width, null);
+			//g.setColor(Color.BLACK);
 		else if (isStart)
-			g.setColor(Color.GREEN);
+			g.drawImage(MazeGameManager.mazeImages.getImage("START"), x*height, y*width, null);
+
+			//g.setColor(Color.GREEN);
 		else if (isEnd)
-			g.setColor(Color.RED);
+			g.drawImage(MazeGameManager.mazeImages.getImage("END"), x*height, y*width, null);
+
+			//g.setColor(Color.RED);
 		else if (isTreasure)
-			g.setColor(Color.YELLOW);
+			g.drawImage(MazeGameManager.mazeImages.getImage("COIN"), x*height, y*width, null);
+
+			//g.setColor(Color.YELLOW);
 		else 
-			g.setColor(Color.WHITE);
+			g.drawImage(MazeGameManager.mazeImages.getImage("PATH"), x*height, y*width, null);
+
+			//g.setColor(Color.WHITE);
 		
-		g.fillRect(x*height, y*width, height, width);
+		//g.fillRect(x*height, y*width, height, width);
 		
-		g.drawRect(x*height, y*width, height, width);
+		//g.drawRect(x*height, y*width, height, width);
 	}
 	public int getX(){
 		return x;

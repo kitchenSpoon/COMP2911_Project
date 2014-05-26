@@ -1,5 +1,10 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+
+import javax.imageio.ImageIO;
 public class ImageStore {
 
 	private HashMap<String, Image> imageRefs;
@@ -8,10 +13,16 @@ public class ImageStore {
 		imageRefs = new HashMap<String, Image>();
 	}
 	
-	public void add(String ref) {
-		if (imageRefs.containsKey(ref)) {
+	public void add(String path, String ref) {
+		BufferedImage newImage = null;
+		try {
+			newImage = ImageIO.read(new File(path));
 			
+			imageRefs.put(ref, newImage);
+		} catch (IOException e) {
+			return;
 		}
+				
 	}
 	
 	public Image getImage(String ref) {
