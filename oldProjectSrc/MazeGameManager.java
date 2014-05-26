@@ -37,7 +37,7 @@ public class MazeGameManager {
 	DecimalFormat df = new DecimalFormat("#.00");
 	public static ImageStore mazeImages = new ImageStore();
 	int themeReference;
-
+	private boolean newGameClicked = false;
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
 		mazeImages.add("./images/end80.png", "END");
@@ -84,8 +84,9 @@ public class MazeGameManager {
 	
 	private void constructMazeGame() {
 		inputReceiver = new InputReceiver();
-		if (frame != null) {
+		if (newGameClicked) {
 			frame.dispose();
+			newGameClicked = false;
 		}
 		frame = new JFrame("Maze of Doom");
 		menuPanel = new JPanel();
@@ -152,7 +153,7 @@ public class MazeGameManager {
 		
 		//timer for points
 		long start = System.currentTimeMillis();
-		while (playing && frame.isShowing()) {
+		while (playing && frame.isShowing() && !newGameClicked) {
 			
 			if (!input.isEmpty()) {
 				
@@ -229,7 +230,7 @@ public class MazeGameManager {
 			}
 		}
 		
-		if (playing && frame.isShowing()) {
+		if (playing && frame.isShowing() && !newGameClicked) {
 			long end = System.currentTimeMillis();
 			double duration = (end - start)/1000.0;
 			
@@ -261,8 +262,11 @@ public class MazeGameManager {
 								+ "You score " + ((player.getScore() * 10) - duration) + 
 								" points. (10 points for every treasure minus the time taken)");
 		} 
+		
 		frame.dispose();
-
+		if(newGameClicked) {
+			startGame();
+		}
 	}
 
 	public void updateTreasure(Player player,Player player2, Maze maze) {
@@ -310,7 +314,9 @@ public class MazeGameManager {
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				constructMazeGame();
+				newGameClicked = true;
+				//frame.setVisible(false);
+				//startGame();
 //				frame.dispose();
 //				frame = new JFrame("Maze of Doom");
 //				
