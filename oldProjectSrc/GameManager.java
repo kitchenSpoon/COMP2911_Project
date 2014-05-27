@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +24,9 @@ public class GameManager {
 	static ArrayList<ScoreNode> hardScores;
 	public final static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public final static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+	
 	public GameManager() {
+	
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(300, 250);
@@ -61,10 +62,7 @@ public class GameManager {
 		JButton settingsButton = new JButton("Settings");
 		settingsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				
 				settingsClicked = true;
-				
-				
 			}
 		});
 		c.weighty = 1;
