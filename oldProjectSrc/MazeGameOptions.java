@@ -5,11 +5,13 @@ public class MazeGameOptions {
 	private boolean hasAI;
 	private boolean hasMultiplayer;
 	private boolean hasTreasure;
+	private boolean hasSound;
 	
 	public MazeGameOptions(){
 		difficulty = 0;
 		hasTreasure = false;
 		hasMultiplayer = false;
+		hasSound = true;
 	}
 	
 	public int getDifficulty() {
@@ -43,4 +45,6 @@ public class MazeGameOptions {
 	public void setHasTreasure(boolean hasTreasure) {
 		this.hasTreasure = hasTreasure;
 	}
+	
+	
 }

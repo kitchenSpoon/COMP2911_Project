@@ -6,7 +6,9 @@ import javax.sound.sampled.Clip;
 
 
 public class SoundPlayer {
+	private static boolean hasSound;
 	public static synchronized void playSound(String filepath) {
+		if(!hasSound) return;
 		try {
 			Clip clip = AudioSystem.getClip();
 			File soundFile = new File(filepath);
@@ -28,5 +30,21 @@ public class SoundPlayer {
 	
 	public static synchronized void playBGSound() {
 		playSound("./sound/wild_pokemon_battle.mid");
+	}
+	
+	public boolean getHasSound(){
+		return hasSound;
+	}
+	
+	public static void setHasSound(boolean _hasSound){
+		hasSound = _hasSound;
+	}
+	
+	public static void toggleSound(){
+		if(hasSound){
+			hasSound = false;
+		} else {
+			hasSound = true;
+		}
 	}
 }

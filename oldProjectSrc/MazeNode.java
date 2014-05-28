@@ -7,7 +7,6 @@ import java.awt.Image;
 public class MazeNode extends Component {
 	int x,y,height,width;
 	boolean isWall, isTreasure, isStart, isEnd, toRender;
-	private Sprite sprite;
 	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd){
 		x = _x;
 		y = _y;
