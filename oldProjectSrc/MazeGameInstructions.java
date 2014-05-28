@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,20 +15,30 @@ public class MazeGameInstructions {
 	private JSplitPane splitPane;
 	private JSplitPane splitPaneSingle;
 	private JSplitPane splitPaneMultiplayer;
+	private Font titleFont;
+	private Font textFont;
 	
 	public MazeGameInstructions () {
 		
+		titleFont = new Font("Title", Font.BOLD, 20);
+		textFont = new Font("Text", Font.PLAIN, 14);
+		
 		frame = new JFrame("How to Play");
+		
+		JLabel frameLabel = new JLabel ("HOW TO PLAY MAZE OF DOOM", JLabel.CENTER);
+		frameLabel.setFont(titleFont);
+		frame.add(frameLabel, BorderLayout.NORTH);
+		
 		
 		initialiseSingle();
 		initialiseMultiplayer();
 
 		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPaneSingle, splitPaneMultiplayer);
 		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(150);
+		splitPane.setDividerLocation(200);
         splitPane.setPreferredSize(new Dimension(400, 400));
          
-        frame.add(splitPane);
+        frame.add(splitPane, BorderLayout.CENTER);
         frame.setSize(650,450);
         frame.setVisible(true);
 		 
@@ -34,6 +47,8 @@ public class MazeGameInstructions {
 	private void initialiseSingle () {
 		
 		JLabel title = new JLabel("Single Player Mode", JLabel.CENTER);
+		title.setFont(titleFont);
+		title.setForeground(Color.DARK_GRAY);
 		
 		JTextArea singleInstructions = new JTextArea (
 				
@@ -49,7 +64,7 @@ public class MazeGameInstructions {
 				
 				+ "WINNING THE GAME\n\n"
 				+ "The goal is to move from the starting square at the top left corner of the maze "
-				+ "to the bottom right square of the maze."
+				+ "to the bottom right square of the maze.\n"
 				
                 + "\n\n"
                 
@@ -58,6 +73,7 @@ public class MazeGameInstructions {
                 + "After completing the maze, the score will be calculated by (treasure points) - (time taken)."
                 );
 		
+		singleInstructions.setFont(textFont);
 		singleInstructions.setEditable(false);
 		singleInstructions.setLineWrap(true);
 		singleInstructions.setWrapStyleWord(true);
@@ -74,8 +90,9 @@ public class MazeGameInstructions {
 	private void initialiseMultiplayer () {
 		
 		JLabel title = new JLabel("Multiplayer Mode", JLabel.CENTER);
-		
-		//JTextArea multiplayerInstructions2 = new JTextArea (10, 30);
+		title.setFont(titleFont);
+		title.setForeground(Color.DARK_GRAY);
+
 		JTextArea multiplayerInstructions = new JTextArea(
 				
 				"NAVIGATION\n\n"
@@ -98,7 +115,8 @@ public class MazeGameInstructions {
                 + "\n\n"
                 
                 + "SCORING\n\n"
-                + "<<TO BE FINALISED>>"
+                + "If the maze has treasure, each coin collected will add 10 points to the player's score. "
+                + "After completing the maze, the score will be calculated by (treasure points) - (time taken)."
 				
                 );
 		
@@ -106,6 +124,7 @@ public class MazeGameInstructions {
 		multiplayerInstructions.setLineWrap(true);
 		multiplayerInstructions.setWrapStyleWord(true);
 		multiplayerInstructions.setCaretPosition(0);
+		multiplayerInstructions.setFont(textFont);
 		
 		JScrollPane scrollPane = new JScrollPane(multiplayerInstructions);
 		scrollPane.setMinimumSize(new Dimension(100, 50));

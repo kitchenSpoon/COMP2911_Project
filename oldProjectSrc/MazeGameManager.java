@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,7 +91,9 @@ public class MazeGameManager {
 			newGameClicked = false;
 		}
 		frame = new JFrame("Maze of Doom");
+		frame.setBackground(Color.DARK_GRAY);
 		menuPanel = new JPanel();
+		menuPanel.setBackground(Color.DARK_GRAY);
 		topMenu();
 		
 		checkGameOptions(frame);
@@ -108,6 +111,7 @@ public class MazeGameManager {
 		
 		menuPanel.addKeyListener(inputReceiver);
 		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
+		mazePanel.setBackground(Color.DARK_GRAY);
 		
 		bottomBar();
 		
@@ -380,9 +384,12 @@ public class MazeGameManager {
 	public void bottomBar () {
 		
 		bottomPanel = new JPanel (new GridBagLayout());
+		bottomPanel.setBackground(Color.DARK_GRAY);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		scoreText = new JTextArea();
+		scoreText.setBackground(Color.DARK_GRAY);
+		scoreText.setForeground(Color.WHITE);
 		c.gridx = 0;
 		c.gridy = 0;
 		bottomPanel.add(scoreText, c);

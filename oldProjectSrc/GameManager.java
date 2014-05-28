@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -6,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -29,10 +33,20 @@ public class GameManager {
 	
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(300, 250);
-
+		mainFrame.setSize(500, 400);
+		mainFrame.setBackground(Color.DARK_GRAY);
+		
 		JPanel mainPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		mainPanel.setBackground(Color.DARK_GRAY);
+		
+		ImageIcon titleImage = new ImageIcon("./images/title.jpg");
+		JLabel titleLabel = new JLabel(titleImage);
+		c.weighty = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(titleLabel, c);
 		
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
@@ -43,7 +57,8 @@ public class GameManager {
 		});
 		c.weighty = 1;
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = 1;
+		c.gridwidth = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(newMazeButton, c);
 		
@@ -55,7 +70,7 @@ public class GameManager {
 		});
 		c.weighty = 1;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(instructionsButton, c);
 		
@@ -67,7 +82,7 @@ public class GameManager {
 		});
 		c.weighty = 1;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(settingsButton, c);
 		
@@ -81,7 +96,7 @@ public class GameManager {
 		});
 		c.weighty = 1;
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(highScoresButton, c);
 		
@@ -92,7 +107,7 @@ public class GameManager {
 			}
 		});
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(exitButton, c);
 		
