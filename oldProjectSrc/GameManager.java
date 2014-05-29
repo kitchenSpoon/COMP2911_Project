@@ -23,9 +23,13 @@ public class GameManager {
 	private boolean newGameClicked = false;
 	private boolean settingsClicked = false;
 	
-	static ArrayList<ScoreNode> easyScores;
-	static ArrayList<ScoreNode> mediumScores;
-	static ArrayList<ScoreNode> hardScores;
+	//static ArrayList<ScoreNode> easyScores;
+	//static ArrayList<ScoreNode> mediumScores;
+	//static ArrayList<ScoreNode> hardScores;
+	
+	static Scoreboard easyScores;
+	static Scoreboard mediumScores;
+	static Scoreboard hardScores;
 	public final static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public final static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	
@@ -91,7 +95,7 @@ public class GameManager {
 		JButton highScoresButton = new JButton("High Scores");
 		highScoresButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				Scoreboard scores = new Scoreboard();
+				ScoreboardPrinter scores = new ScoreboardPrinter();
 			}
 		});
 		c.weighty = 1;
@@ -127,9 +131,9 @@ public class GameManager {
 	
 	private void initialiseScoreboards () {
 		
-		easyScores = new ArrayList<ScoreNode>();
-		mediumScores = new ArrayList<ScoreNode>();
-		hardScores = new ArrayList<ScoreNode>();
+		easyScores = new Scoreboard(".easy.txt");
+		mediumScores = new Scoreboard(".medium.txt");
+		hardScores = new Scoreboard(".hard.txt");
 		
 	}
 	

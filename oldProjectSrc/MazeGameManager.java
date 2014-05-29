@@ -35,7 +35,7 @@ public class MazeGameManager {
 	boolean resetGame = false;
 	boolean playing = true; // set to false when main menu button is pressed
 	MazeGameOptions mazeOptions;
-	ArrayList<ScoreNode> scores;
+	Scoreboard scores;
 	DecimalFormat df = new DecimalFormat("#.00");
 	public static ImageStore mazeImages = new ImageStore();
 	int themeReference;
@@ -248,7 +248,7 @@ public class MazeGameManager {
 								 " points. (10 points for every treasure minus the time taken)");
 			
 			ScoreNode newScore = new ScoreNode(winnerScore, playerName);
-			scores.add(newScore);
+			scores.addScore(newScore);
 			
 			System.out.println("You Win!! You took " + duration + " seconds\n"
 								+ "You score " + ((player.getScore() * 10) - duration) + 

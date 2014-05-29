@@ -17,4 +17,8 @@ public class ScoreNode {
 		return score;
 	}
 	
+	public String toString () {
+		return score + " " + player;
+	}
+	
 }
