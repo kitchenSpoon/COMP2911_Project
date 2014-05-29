@@ -51,9 +51,17 @@ public class MazeGameManager {
 		
 	}
 	
+	/**
+	 * Start game
+	 */
 	public void startGame() {
 		gameLoop();
 	}
+	
+	/**
+	 * Set game attributes associated with different game difficulty level.
+	 * @param frame
+	 */
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
 			maze = new Maze(11, 11);
@@ -61,9 +69,6 @@ public class MazeGameManager {
 			scores = GameManager.easyScores;
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
-			//maze = new Maze(21, 21);
-			//maze = new Maze(19, 19);
-			//frame.setSize(420, 545);
 			maze = new Maze(23, 23);
 			frame.setSize(460, 585);
 			scores = GameManager.mediumScores;
@@ -74,16 +79,29 @@ public class MazeGameManager {
 			scores = GameManager.hardScores;
 		}
 	}
+	
+	/**
+	 * Check if the option to generate treasure is set and generate treasure if it is.
+	 * @param frame 
+	 */
 	public void checkTreasure(JFrame frame){
 		if (mazeOptions.isHasTreasure() == true) {
 			maze.generateTreasure();
 		}
 	}
+	
+	/**
+	 * Check Different game options and modify the game accordingly
+	 * @param frame 
+	 */
 	public void checkGameOptions(JFrame frame){
 		checkDifficulty(frame);
 		checkTreasure(frame);
 	}
 	
+	/**
+	 * Construct maze game.
+	 */
 	private void constructMazeGame() {
 		inputReceiver = new InputReceiver();
 		if (newGameClicked) {
@@ -121,56 +139,30 @@ public class MazeGameManager {
 		frame.setVisible(true);
 		frame.requestFocus();
 		
-		SoundPlayer.playBGSound();
+		//remove
+		//SoundPlayer.playBGSound();
 		
 		start = System.currentTimeMillis();
 		
 	}
 	
+	/**
+	 * Game loop, construct maze, handles inputs and game logic
+	 */
 	private void gameLoop() {
 
-//		inputReceiver = new InputReceiver();
-//		frame = new JFrame("Maze of Doom");
-//		menuPanel = new JPanel();
-//		topMenu();
-//		
-//		checkGameOptions(frame);
-//		
-//		if(maze == null) System.out.println("Maze must be initialized before player");
-//		player = new Player("Jack", 1, 1,0);
-//		
-//		//multiplayer options
-//		if(mazeOptions.isHasMultiplayer())
-//			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
-//		
-//		popup = new StatusPopup(frame);
-//		frame.add(menuPanel, BorderLayout.NORTH);
-//		frame.addKeyListener(inputReceiver);
-//		
-//		menuPanel.addKeyListener(inputReceiver);
-//		mazePanel = new MazePanel(maze.getTiles(), 1, 1, player, player2);
-//		
-//		bottomBar();
-//		
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.add(mazePanel, BorderLayout.CENTER);
-//		frame.setVisible(true);
-//		frame.requestFocus();
-//		
 		constructMazeGame();
 		
-		//timer for points
-		
 		while (playing && frame.isShowing() && !newGameClicked) {
-			
 			if (!input.isEmpty()) {
-				
+				//timer for points
 				long end = System.currentTimeMillis();
 				double duration = (end - start)/1000.0;
 				
 				if (!mazeOptions.isHasMultiplayer()) {
 					scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
 			                  "Treasure collected: " + (int) player.getScore());
+					
 					if (input.equals("UP") || input.equals("DOWN")
 							|| input.equals("LEFT") || input.equals("RIGHT")
 							|| input.equals("RESET")) {
@@ -178,10 +170,10 @@ public class MazeGameManager {
 							input = "RESET";
 							resetGame = false;
 						}
+						
 						int oldX = player.getX();
 						int oldY = player.getY();
 						player.updatePlayer(maze, input);
-						// r.renderAll();
 						updatePlayer(player, oldX, oldY);
 						input = "NO_MOVE";
 					}
@@ -189,6 +181,7 @@ public class MazeGameManager {
 					scoreText.setText("Time elapsed: " + df.format(duration) + " seconds\n" + 
 			                  "P1 Treasure collected: " + (int) player.getScore() + "\n" +
 			                  "P2 Treasure collected: " + (int) player2.getScore());
+					
 					if (input.equals("UP") || input.equals("DOWN")
 							|| input.equals("LEFT") || input.equals("RIGHT")
 							|| input.equals("RESET")) {
@@ -196,10 +189,10 @@ public class MazeGameManager {
 							input = "RESET";
 							resetGame = false;
 						}
+						
 						int oldX = player.getX();
 						int oldY = player.getY();
 						player.updatePlayer(maze, input);
-						// r.renderAll();
 						updatePlayer(player, oldX, oldY);
 						input = "NO_MOVE";
 					} else if (input.equals("UP2") || input.equals("DOWN2")
@@ -209,34 +202,21 @@ public class MazeGameManager {
 							input = "RESET";
 							resetGame = false;
 						}
+						
 						int oldX = player2.getX();
 						int oldY = player2.getY();
 						player2.updatePlayer(maze, input);
-						// r.renderAll();
 						updatePlayer(player2, oldX, oldY);
 						input = "NO_MOVE";
 					}
 				}
-				//multiplayer options
-//				if(mazeOptions.isHasMultiplayer()){
-//					if (input.equals("UP2") || input.equals("DOWN2")
-//							|| input.equals("LEFT2") || input.equals("RIGHT2")
-//							|| input.equals("RESET")) {
-//						if (resetGame) {
-//							input = "RESET";
-//							resetGame = false;
-//						}
-//						int oldX = player2.getX();
-//						int oldY = player2.getY();
-//						player2.updatePlayer(maze, input);
-//						// r.renderAll();
-//						updatePlayer(player2,oldX, oldY);
-//						input = "NO_MOVE";
-//					}
-//				}
 			}
-			// maze.printMaze(player.getX(),player.getY());
+			// maze.printMaze(player.getX(),player.getY()); /*debuggin*/
+			
+			//checks if players have walked over any treasure
 			updateTreasure(player, player2, maze);
+			
+			//checks if anyone won
 			if (checkGame(player, player2, maze)) {
 				break;
 			}
@@ -281,6 +261,12 @@ public class MazeGameManager {
 		}
 	}
 
+	/**
+	 * Check collision with treasure and picks it up.
+	 * @param player
+	 * @param player2
+	 * @param maze
+	 */
 	public void updateTreasure(Player player,Player player2, Maze maze) {
 		System.out.println(player.getX() + " " + player.getY());
 		if(maze.isTreasure(player.getX(),player.getY())){
@@ -301,6 +287,13 @@ public class MazeGameManager {
 		}
 	}
 	
+	/**
+	 * Checks if the game has ended.
+	 * @param player
+	 * @param player2
+	 * @param maze
+	 * @return
+	 */
 	public boolean checkGame(Player player,Player player2, Maze maze) {
 		MazeNode start = maze.getStart();
 		MazeNode end = maze.getEnd();
@@ -321,42 +314,23 @@ public class MazeGameManager {
 		return false;
 	}
 
+	/**
+	 * In game options
+	 */
 	public void topMenu() {
 
+		//generate new maze button
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				newGameClicked = true;
-				//frame.setVisible(false);
-				//startGame();
-//				frame.dispose();
-//				frame = new JFrame("Maze of Doom");
-//				
-//				checkGameOptions(frame);
-//				
-//				if(maze == null) System.out.println("Maze must be initialized before player");
-//				player = new Player("Jack", 1, 1,0);
-//				
-//				//multiplayer options
-//				if(mazeOptions.isHasMultiplayer())
-//					player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
-//				
-//				frame.add(menuPanel, BorderLayout.NORTH);
-//				mazePanel = new MazePanel(maze.getTiles(), 1, 1, player,player2);
-//				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//				frame.add(mazePanel, BorderLayout.CENTER);
-//				frame.addKeyListener(inputReceiver);
-//				menuPanel.addKeyListener(inputReceiver);
-//				bottomBar();
-//				frame.setVisible(true);
-//				frame.requestFocus();
 			}
 		});
 
+		// reset player position button
 		JButton resetPlayerButton = new JButton("Restart");
 		resetPlayerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				
 				start = System.currentTimeMillis();
 				
 				maze.regenerateTreasure();
@@ -375,12 +349,24 @@ public class MazeGameManager {
 				frame.requestFocus();
 			}
 		});
+		
+		// mute/unmute button
+		JButton muteToggleButton = new JButton("Mute/Unmute");
+		muteToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				SoundPlayer.toggleSound();
+				frame.requestFocus();
+			}
+		});
 
 		menuPanel.add(newMazeButton);
 		menuPanel.add(resetPlayerButton);
-
+		menuPanel.add(muteToggleButton);
 	}
 	
+	/**
+	 * In game options
+	 */
 	public void bottomBar () {
 		
 		bottomPanel = new JPanel (new GridBagLayout());
@@ -394,6 +380,7 @@ public class MazeGameManager {
 		c.gridy = 0;
 		bottomPanel.add(scoreText, c);
 		
+		//go back to main menu
 		JButton mainMenuButton = new JButton("Main Menu");
 		mainMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -408,12 +395,16 @@ public class MazeGameManager {
 
 	}
 	
+	/**
+	 * Update player's graphic
+	 * Should this be placed here? 
+	 * @param p Player whose graphic is to be moved.
+	 * @param oldX Old position
+	 * @param oldY Old position
+	 */
 	public void updatePlayer(Player p, int oldX, int oldY) {
-		
 		mazePanel.moveSquare(p,oldX, oldY);
 		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
-		
+		frame.getContentPane().repaint();	
 	}
-
 }
