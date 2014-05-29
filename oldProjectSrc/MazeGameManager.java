@@ -355,6 +355,11 @@ public class MazeGameManager {
 		muteToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				SoundPlayer.toggleSound();
+				if(SoundPlayer.getHasSound()){
+					muteToggleButton.setSelected(true);
+				} else {
+					muteToggleButton.setSelected(false);
+				}
 				frame.requestFocus();
 			}
 		});
