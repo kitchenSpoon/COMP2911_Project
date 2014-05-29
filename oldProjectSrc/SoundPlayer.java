@@ -54,7 +54,7 @@ public class SoundPlayer {
 	 * Return if we have disable sound
 	 * @return
 	 */
-	public boolean getHasSound(){
+	public static boolean getHasSound(){
 		return hasSound;
 	}
 	

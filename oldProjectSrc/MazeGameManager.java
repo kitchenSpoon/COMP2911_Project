@@ -351,7 +351,7 @@ public class MazeGameManager {
 		});
 		
 		// mute/unmute button
-		JButton muteToggleButton = new JButton("Mute/Unmute");
+		final JButton muteToggleButton = new JButton("Mute/Unmute");
 		muteToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				SoundPlayer.toggleSound();
@@ -362,6 +362,7 @@ public class MazeGameManager {
 		menuPanel.add(newMazeButton);
 		menuPanel.add(resetPlayerButton);
 		menuPanel.add(muteToggleButton);
+		
 	}
 	
 	/**
