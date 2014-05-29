@@ -64,18 +64,21 @@ public class MazeGameManager {
 	 */
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
-			maze = new Maze(11, 11);
-			frame.setSize(220, 345);
+			int height = 11, width = 11;
+			maze = new Maze(width, height);
+			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.easyScores;
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
-			maze = new Maze(23, 23);
-			frame.setSize(460, 585);
+			int height = 23, width = 31;
+			maze = new Maze(width, height);
+			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.mediumScores;
 		}
 		else {
-			maze = new Maze(31, 31);
-			frame.setSize(620, 745);
+			int height = 27,width = 43;
+			maze = new Maze(width, height);
+			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.hardScores;
 		}
 	}
