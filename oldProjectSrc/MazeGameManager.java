@@ -64,7 +64,7 @@ public class MazeGameManager {
 	 */
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
-			int height = 11, width = 11;
+			int height = 11, width = 19;
 			maze = new Maze(width, height);
 			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.easyScores;
