@@ -2,6 +2,11 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * Maze class is in charge of generating the maze
+ * @author User_Lian
+ *
+ */
 public class Maze {
 	public final static String IMAGE_PATH = "./images/";
 	MazeNode[][] tiles;
@@ -26,14 +31,26 @@ public class Maze {
 		//displayMaze();
 	}
 	
+	/**
+	 * Return the tiles that represent the maze
+	 * @return
+	 */
 	public MazeNode[][] getTiles() {
 		return tiles;
 	}
 
+	/**
+	 * Return the end point of the maze
+	 * @return
+	 */
 	public MazeNode getEnd(){
 		return end;
 	}
 	
+	/**
+	 * Return the start point of the maze
+	 * @return
+	 */
 	public MazeNode getStart(){
 		return start;
 	}
@@ -57,7 +74,6 @@ public class Maze {
 	
 	/**
 	 * Carve walkable passage in the maze
-	 * Maybe we could use a maze generator class
 	 */
 	public void generateMaze(){
 		ArrayList<MazeNode> visited = new ArrayList<MazeNode>();
@@ -92,7 +108,7 @@ public class Maze {
 			}
 			
 			//Neighbours
-			//there are better ways to do this?
+			//are there better ways to do this?
 			ArrayList<MazeNode> randNeighbours = new ArrayList<MazeNode>();
 			
 			if(curr.getX()-2 >= 0 && !visited.contains(tiles[curr.getX()-2][curr.getY()])){
@@ -109,7 +125,6 @@ public class Maze {
 			}
 			
 			//permute
-			//please put me into a function
 			for(int i = 0; i < randNeighbours.size(); i++){
 				Random random = new Random();
 				int p = random.nextInt((randNeighbours.size()-1) - i + 1) + i;
@@ -132,22 +147,48 @@ public class Maze {
 		}
 	}
 	
+	/**
+	 * Check if a tile is a wall
+	 * @param x coordinate of the tile
+	 * @param y coordinate of the tile
+	 * @return boolean
+	 */
 	public boolean isWall(int x, int y){
 		return tiles[x][y].isWall();
 	}
 	
+	/**
+	 * Check if a tile contains a treasure
+	 * @param x coordinate of the tile
+	 * @param y coordinate of the tile
+	 * @return boolean
+	 */
 	public boolean isTreasure(int x, int y){
 		return tiles[x][y].isTreasure();
 	}
 	
+	/**
+	 * Set a tile as containing/not containing a treasure
+	 * @param x coordinate of the tile
+	 * @param y coordinate of the tile
+	 * @param val boolean
+	 */
 	public void setTreasure(int x, int y, boolean val){
 		tiles[x][y].setTreasure(val);
 	}
 	
+	/**
+	 * Return height of the maze
+	 * @return int
+	 */
 	public int getHeight(){
 		return height;
 	}
 	
+	/**
+	 * Return width of the maze
+	 * @return int
+	 */
 	public int getWidth(){
 		return width;
 	}
@@ -155,7 +196,6 @@ public class Maze {
 	/**
 	 * Display the maze
 	 */
-	
 	public void displayMaze () {
 		
 		JPanel mazePanel = new JPanel();
@@ -209,6 +249,9 @@ public class Maze {
 		}
 	}
 	
+	/**
+	 * Generate random treasure on the maze
+	 */
 	public void generateTreasure(){
 		//maze should already be generated
 		int numTreasure = (height * width)/20;
@@ -226,6 +269,9 @@ public class Maze {
 		}
 	}
 	
+	/**
+	 * Regenerate treasure taken by players
+	 */
 	public void regenerateTreasure(){
 		//maze should already be generated
 		for(MazeNode treasure : treasureList){
@@ -235,6 +281,7 @@ public class Maze {
 	
 	/**
 	 * For debugging
+	 * Prints maze in ASCII
 	 */
 	public void printMaze(){
 		for(int i = 0; i < height; i++){
