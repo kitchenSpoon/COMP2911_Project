@@ -2,7 +2,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 
-
+/**
+ * Player
+ * @author User_Lian
+ *
+ */
 public class Player extends Component {
 
 	private int x;
@@ -26,41 +30,59 @@ public class Player extends Component {
 		colour = _colour;
 		height = 20;
 		width = 20;
-		//Renderer.addToRenderer(this);
 	}
-	@Override
+	
+	/**
+	 * Get x position
+	 */
 	public int getX() {
 		return x;
 	}
 
-	@Override
+	/**
+	 * Get y position
+	 */
 	public int getY() {
 		return y;
 	}
+	
+	/**
+	 * Set x position
+	 * @param _x
+	 */
 	public void setX(int _x) {
 		x = _x;
 	}
 	
+	/**
+	 * Set y position
+	 * @param _y
+	 */
 	public void setY(int _y) {
 		x = _y;
 	}
 	
+	/**
+	 * Get player's score
+	 * @return
+	 */
 	public double getScore(){
 		return score;
 	}
 	
+	/**
+	 * Set player's score
+	 * @param _score
+	 */
 	public void setScore(double _score){
 		score = _score;
 	}
 	
-	public String getImagePath() {
-		return "occupiedSquare_10.jpg";
-	}
-	public boolean toRender() {
-		return toRender;
-	}
-	
-	
+	/**
+	 * Update player's position
+	 * @param maze
+	 * @param input
+	 */
 	public void updatePlayer(Maze maze,String input){
 		if(input.equals("LEFT") || input.equals("LEFT2")){
 			if(!maze.isWall(x - 1, y))
@@ -84,36 +106,10 @@ public class Player extends Component {
 		}
 	}
 
+	/**
+	 * Paint the image
+	 */
 	public void paint(Graphics g) {
-//		if(colour == 0)
-//			g.setColor(Color.BLUE);
-//		else
-//			g.setColor(Color.cyan);
-//		g.fillRect(x*height, y*width, height-1, width-1);
-//		g.drawRect(x*height, y*width, height-1, width-1);
-		
-		
 		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*20, y*20, null);
 	}
-	
-//	
-//	public void updatePlayer(Maze maze,String input){
-//		if(input.equals("UP")){
-//			if(!maze.isWall(x - 1, y))
-//				x -= 1;
-//		} 
-//		else if (input.equals("DOWN")){
-//			if(!maze.isWall(x + 1, y))
-//				x += 1;
-//		}
-//		else if (input.equals("LEFT")){
-//			if(!maze.isWall(x, y - 1))
-//				y -= 1;
-//		}
-//		else if (input.equals("RIGHT")){
-//			if(!maze.isWall(x, y + 1))
-//				y += 1;
-//		}
-//	}
-//	
 }
