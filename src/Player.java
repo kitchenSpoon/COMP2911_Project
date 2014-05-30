@@ -111,5 +111,10 @@ public class Player extends Component {
 	 */
 	public void paint(Graphics g) {
 		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*width, y*height, width, height, this);
+		if (colour == 0) {
+			g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER1"),x*width, y*height, width, height, this);
+		} else {
+			g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER2"),x*width, y*height, width, height, this);
+		}
 	}
 }

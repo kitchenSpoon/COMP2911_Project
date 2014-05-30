@@ -16,6 +16,11 @@ public class MazeTheme {
 	public MazeTheme(String...paths) {
 		storePaths(Arrays.asList(paths));
 	}
+	
+	public MazeTheme(ArrayList<String> paths) {
+		imagePaths = new HashMap<String, String>();
+		storePaths(paths);
+	}
 
 	private void storePaths(List<String> paths) {
 		int i = 0;
@@ -27,7 +32,9 @@ public class MazeTheme {
 		i++;
 		imagePaths.put("PATH", paths.get(i));
 		i++;
-		imagePaths.put("PLAYER", paths.get(i));
+		imagePaths.put("PLAYER1", paths.get(i));
+		i++;
+		imagePaths.put("PLAYER2", paths.get(i));
 		i++;
 		imagePaths.put("PREVIEW", paths.get(i));
 		i++;

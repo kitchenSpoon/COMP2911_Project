@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
 
 /**
  * A class that runs a maze game in a new frame
@@ -357,12 +358,13 @@ public class MazeGameManager {
 		});
 		
 		// mute/unmute button
-		final JButton muteToggleButton = new JButton("Mute/Unmute");
+		final JToggleButton muteToggleButton = new JToggleButton("Mute/Unmute");
 		muteToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				SoundPlayer.toggleSound();
 				if(SoundPlayer.getHasSound()){
 					muteToggleButton.setSelected(true);
+					//muteToggleButton.set
 				} else {
 					muteToggleButton.setSelected(false);
 				}

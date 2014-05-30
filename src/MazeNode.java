@@ -27,9 +27,10 @@ public class MazeNode extends Component {
 	 * Paint this image on the screen
 	 */
 	public void paint(Graphics g) {
-		if (isWall)
+
+		if (isWall){
 			g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*width, y*height,width,height, null);
-		else if (isStart)
+		} else if (isStart)
 			g.drawImage(MazeGameManager.mazeImages.getImage("START"), x*width, y*height,width,height, null);
 		else if (isEnd)
 			g.drawImage(MazeGameManager.mazeImages.getImage("END"), x*width, y*height,width,height, null);
