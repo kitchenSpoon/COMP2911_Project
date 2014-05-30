@@ -57,5 +57,4 @@ public class MazeTheme {
 	public String getName() {
 		return name;
 	}
-	
 }

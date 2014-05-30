@@ -17,7 +17,9 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
-
+/**
+ * A class which creates a new frame to display the settings menu
+ */
 public class CustomiseMazeGame {
 
 	public final static int EASY = 0;
@@ -31,8 +33,12 @@ public class CustomiseMazeGame {
 	private ImageStore previews;
 	private ArrayList<MazeTheme> themes;
 	
-	//private int difficulty = 0; // default easy difficulty
-	
+	/**
+	 * Initialise the menu
+	 * @param _mazeOptions the default maze game settings
+	 * @param themePreviews images used for the theme previews
+	 * @param themes a list of themes 
+	 */
 	public CustomiseMazeGame (MazeGameOptions _mazeOptions, ImageStore themePreviews, ArrayList<MazeTheme> themes) {
 		if(mazeOptions == null) {
 			System.out.println("MazeOptions is null");
@@ -63,6 +69,9 @@ public class CustomiseMazeGame {
 		
 	}
 
+	/**
+	 * Show the themes selection
+	 */
 	public void initialiseTheme() {
 		JPanel themePanel = new JPanel();
 		JLabel themeLabel = new JLabel("Choose a theme");
@@ -95,12 +104,7 @@ public class CustomiseMazeGame {
 								break;
 							}
 						}
-//						System.out.println(((JRadioButtonMenuItem) source).getBounds());
-//						Point p = ((JRadioButtonMenuItem) source).getLocation();
-//						System.out.println(p);
-//						Rectangle r = new Rectangle(new Point((int) p.getX(), (int)p.getY() - 68));
-//						((JRadioButtonMenuItem) source).scrollRectToVisible(new Rectangle(p));
-//						System.out.println(scrollPane.getViewport().getViewPosition());
+
 					}
 				}
 			});
@@ -140,6 +144,11 @@ public class CustomiseMazeGame {
 		container.add(themePanel, BorderLayout.SOUTH);
 		
 	}
+	
+	/**
+	 * Show the difficulty selection
+	 * Easy, Medium or Hard
+	 */
 	private void initialiseDifficulty () {
 		
 		JPanel difficultyPanel = new JPanel ();
@@ -199,6 +208,10 @@ public class CustomiseMazeGame {
 		
 	}
 	
+	/**
+	 * Show the treasure options
+	 * Treasure or No Treasure 
+	 */
 	private void initialiseTreasure() {
 		
 		JPanel treasurePanel = new JPanel ();
@@ -234,6 +247,10 @@ public class CustomiseMazeGame {
 		
 	}
 
+	/**
+	 * Show the multiplayer options
+	 * Single Player or Multiplayer (2 Players)
+	 */
 	private void initialiseMultiplayer() {
 		
 		JPanel multiplayerPanel = new JPanel ();
@@ -270,6 +287,9 @@ public class CustomiseMazeGame {
 		
 	}
 	
+	/**
+	 * Show the submit button to save changes to the game options
+	 */
 	private void initialiseDone () {
 		
 		JPanel donePanel = new JPanel();
@@ -284,12 +304,4 @@ public class CustomiseMazeGame {
 		container.add(donePanel, BorderLayout.SOUTH);
 		
 	}
-	
-	public boolean settingsOpen () {
-		
-		return frame.isVisible();
-		
-	}
-	
-	
 }

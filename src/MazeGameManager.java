@@ -1,21 +1,20 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+/**
+ * A class that runs a maze game in a new frame
+ */
 public class MazeGameManager {
 	
 	public final static int WIN = 1;
@@ -250,14 +249,14 @@ public class MazeGameManager {
 			
 			String playerName = popup.winPopupCustom(winnerName + " Win!! " + winnerName + " took " + duration + " seconds\n"
 								 + winnerName + " score " + winnerScore + 
-								 " points. (10 points for every treasure minus the time taken)");
+								 " points.");
 			
 			ScoreNode newScore = new ScoreNode(winnerScore, playerName);
 			scores.addScore(newScore);
 			
 			System.out.println("You Win!! You took " + duration + " seconds\n"
 								+ "You score " + ((player.getScore() * 10) - duration) + 
-								" points. (10 points for every treasure minus the time taken)");
+								" points.");
 		} 
 		
 		frame.dispose();
