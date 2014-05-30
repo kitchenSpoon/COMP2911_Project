@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
 
 public class MazeGameManager {
 	
@@ -272,7 +273,7 @@ public class MazeGameManager {
 	 * @param maze
 	 */
 	public void updateTreasure(Player player,Player player2, Maze maze) {
-		System.out.println(player.getX() + " " + player.getY());
+		//System.out.println(player.getX() + " " + player.getY());
 		if(maze.isTreasure(player.getX(),player.getY())){
 			System.out.println("Treasure");
 			maze.setTreasure(player.getX(),player.getY(),false);
@@ -355,12 +356,13 @@ public class MazeGameManager {
 		});
 		
 		// mute/unmute button
-		final JButton muteToggleButton = new JButton("Mute/Unmute");
+		final JToggleButton muteToggleButton = new JToggleButton("Mute/Unmute");
 		muteToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				SoundPlayer.toggleSound();
 				if(SoundPlayer.getHasSound()){
 					muteToggleButton.setSelected(true);
+					//muteToggleButton.set
 				} else {
 					muteToggleButton.setSelected(false);
 				}

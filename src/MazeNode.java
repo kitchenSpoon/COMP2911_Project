@@ -27,16 +27,21 @@ public class MazeNode extends Component {
 	 * Paint this image on the screen
 	 */
 	public void paint(Graphics g) {
-		if (isWall)
+		if (isWall) {
+			if (MazeGameManager.mazeImages.getImage("WALL").getHeight(null) > 20 && MazeGameManager.mazeImages.getImage("WALL").getWidth(null) > 20) {
+				g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*height, y*width, height, width, null);
+				
+			}
 			g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*height, y*width, null);
-		else if (isStart)
+		} else if (isStart) {
 			g.drawImage(MazeGameManager.mazeImages.getImage("START"), x*height, y*width, null);
-		else if (isEnd)
+		} else if (isEnd) {
 			g.drawImage(MazeGameManager.mazeImages.getImage("END"), x*height, y*width, null);
-		else if (isTreasure)
+		} else if (isTreasure) {
 			g.drawImage(MazeGameManager.mazeImages.getImage("COIN"), x*height, y*width, null);
-		else 
+		} else {
 			g.drawImage(MazeGameManager.mazeImages.getImage("PATH"), x*height, y*width, null);
+		}
 	}
 	
 	/**

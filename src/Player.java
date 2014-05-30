@@ -110,6 +110,10 @@ public class Player extends Component {
 	 * Paint the image
 	 */
 	public void paint(Graphics g) {
-		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*20, y*20, null);
+		if (colour == 0) {
+			g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER1"),x*20, y*20, null);
+		} else {
+			g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER2"),x*20, y*20, null);
+		}
 	}
 }
