@@ -112,7 +112,6 @@ public class Maze {
 			}
 			
 			//Neighbours
-			//are there better ways to do this?
 			ArrayList<MazeNode> randNeighbours = new ArrayList<MazeNode>();
 			
 			if(curr.getX()-2 >= 0 && !visited.contains(tiles[curr.getX()-2][curr.getY()])){
@@ -143,7 +142,7 @@ public class Maze {
 				parent.add(curr);
 			}
 			
-			/* Debuggin
+			/* Debugging
 			System.out.println(curr.getX() + ", " + curr.getY());
 			printStack(toGoBack);
 			printMaze();
