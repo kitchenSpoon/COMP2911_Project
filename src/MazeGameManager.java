@@ -48,8 +48,8 @@ public class MazeGameManager {
 		//default size
 		height = 11;
 		width = 11;
-		tileHeight = 10;
-		tileWidth = 10;
+		tileHeight = 20;
+		tileWidth = 20;
 	}
 	
 	/**
@@ -68,21 +68,23 @@ public class MazeGameManager {
 			height = 11;
 			width = 19;
 			maze = new Maze(width, height, tileHeight, tileWidth);
-			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
+			frame.setSize(Math.max((width+1)*tileWidth,350), (height-1) * tileHeight + (2 * 80));
 			scores = GameManager.easyScores;
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
 			height = 23;
 			width = 31;
 			maze = new Maze(width, height, tileHeight, tileWidth);
-			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
+			frame.setSize(Math.max((width+1)*tileWidth,350), (height-1) * tileHeight + (2 * 80));
 			scores = GameManager.mediumScores;
 		}
 		else {
-			height = 27;
-			width = 43;
+			height = 31;
+			width = 47;
+			tileHeight = 16;
+			tileWidth = 16;
 			maze = new Maze(width, height, tileHeight, tileWidth);
-			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
+			frame.setSize(Math.max((width+1)*tileWidth,350), (height-1) * tileHeight + (2 * 80));
 			scores = GameManager.hardScores;
 		}
 	}
