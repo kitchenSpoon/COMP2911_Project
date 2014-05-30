@@ -70,7 +70,6 @@ public class MazePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// g.drawString("This is my custom Panel!",50,20);
 		for (MazeNode[] row : mazeNodes) {
 			for (MazeNode mn : row) {
 				mn.paint(g);
