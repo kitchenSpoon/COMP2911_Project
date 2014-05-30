@@ -286,10 +286,6 @@ public class CustomiseMazeGame {
 	}
 	
 	public boolean settingsOpen () {
-		
 		return frame.isVisible();
-		
 	}
-	
-	
 }
