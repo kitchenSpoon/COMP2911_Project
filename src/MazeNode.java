@@ -12,15 +12,15 @@ public class MazeNode extends Component {
 	int x,y,height,width;
 	boolean isWall, isTreasure, isStart, isEnd, toRender;
 	
-	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd){
+	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd, int _height, int _width){
 		x = _x;
 		y = _y;
 		isWall = _isWall;
 		isStart = _isStart;
 		isEnd = _isEnd;
 		toRender = true;
-		height = 20;
-		width = 20;
+		height = _height;
+		width = _width;
 	}
 	
 	/**
@@ -28,15 +28,15 @@ public class MazeNode extends Component {
 	 */
 	public void paint(Graphics g) {
 		if (isWall)
-			g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*height, y*width, null);
+			g.drawImage(MazeGameManager.mazeImages.getImage("WALL"), x*width, y*height,width,height, null);
 		else if (isStart)
-			g.drawImage(MazeGameManager.mazeImages.getImage("START"), x*height, y*width, null);
+			g.drawImage(MazeGameManager.mazeImages.getImage("START"), x*width, y*height,width,height, null);
 		else if (isEnd)
-			g.drawImage(MazeGameManager.mazeImages.getImage("END"), x*height, y*width, null);
+			g.drawImage(MazeGameManager.mazeImages.getImage("END"), x*width, y*height,width,height, null);
 		else if (isTreasure)
-			g.drawImage(MazeGameManager.mazeImages.getImage("COIN"), x*height, y*width, null);
+			g.drawImage(MazeGameManager.mazeImages.getImage("COIN"), x*width, y*height,width,height, null);
 		else 
-			g.drawImage(MazeGameManager.mazeImages.getImage("PATH"), x*height, y*width, null);
+			g.drawImage(MazeGameManager.mazeImages.getImage("PATH"), x*width, y*height,width,height, null);
 	}
 	
 	/**

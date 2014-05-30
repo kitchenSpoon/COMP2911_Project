@@ -39,16 +39,16 @@ public class MazeGameManager {
 	public static ImageStore mazeImages = new ImageStore();
 	int themeReference;
 	private boolean newGameClicked = false;
+	int height, width, tileHeight, tileWidth;
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
 		mazeImages.addTheme(mazeOptions.getTheme());
-//		mazeImages.add("./images/end80.png", "END");
-//		mazeImages.add("./images/path80.png", "PATH");
-//		mazeImages.add("./images/wall80.png", "WALL");
-//		mazeImages.add("./images/player20.png", "PLAYER");
-//		mazeImages.add("./images/start80.png", "START");
-//		mazeImages.add("./images/coin20.png", "COIN");
 		
+		//default size
+		height = 11;
+		width = 11;
+		tileHeight = 10;
+		tileWidth = 10;
 	}
 	
 	/**
@@ -64,20 +64,23 @@ public class MazeGameManager {
 	 */
 	public void checkDifficulty(JFrame frame){
 		if (mazeOptions.getDifficulty() == 0) {
-			int height = 11, width = 19;
-			maze = new Maze(width, height);
+			height = 11;
+			width = 19;
+			maze = new Maze(width, height, tileHeight, tileWidth);
 			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.easyScores;
 		}
 		else if (mazeOptions.getDifficulty() == 1) {
-			int height = 23, width = 31;
-			maze = new Maze(width, height);
+			height = 23;
+			width = 31;
+			maze = new Maze(width, height, tileHeight, tileWidth);
 			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.mediumScores;
 		}
 		else {
-			int height = 27,width = 43;
-			maze = new Maze(width, height);
+			height = 27;
+			width = 43;
+			maze = new Maze(width, height, tileHeight, tileWidth);
 			frame.setSize(Math.max((width+1)*20,350), (height-1) * 20 + (2 * 80));
 			scores = GameManager.hardScores;
 		}
@@ -120,11 +123,11 @@ public class MazeGameManager {
 		checkGameOptions(frame);
 		
 		if(maze == null) System.out.println("Maze must be initialized before player");
-		player = new Player("Jack", 1, 1,0);
+		player = new Player("Jack", 1, 1, 0, tileHeight, tileWidth);
 		
 		//multiplayer options
 		if(mazeOptions.isHasMultiplayer())
-			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
+			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2, 1, tileHeight, tileWidth);
 		
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);

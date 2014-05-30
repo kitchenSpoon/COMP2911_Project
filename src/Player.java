@@ -19,7 +19,7 @@ public class Player extends Component {
 	private double score;
 	boolean toRender;
 	private int colour;
-	public Player(String n, int _xStart, int _yStart,int _colour) {
+	public Player(String n, int _xStart, int _yStart,int _colour, int _height, int _width) {
 		x = _xStart;
 		y = _yStart;
 		xStart = _xStart;
@@ -28,8 +28,8 @@ public class Player extends Component {
 		toRender = true;
 		score = 0;
 		colour = _colour;
-		height = 20;
-		width = 20;
+		height = _height;
+		width = _width;
 	}
 	
 	/**
@@ -110,6 +110,6 @@ public class Player extends Component {
 	 * Paint the image
 	 */
 	public void paint(Graphics g) {
-		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*20, y*20, null);
+		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*width, y*height, width, height, this);
 	}
 }

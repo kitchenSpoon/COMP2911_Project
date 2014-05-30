@@ -12,14 +12,18 @@ public class Maze {
 	MazeNode[][] tiles;
 	int height;
 	int width;
+	int tileHeight;
+	int tileWidth;
 	MazeNode start;
 	MazeNode end;
 	MazeNode currentPosition;
 	ArrayList<MazeNode> treasureList;
 	
-	public Maze(int _height, int _width){
+	public Maze(int _height, int _width, int _tileHeight, int _tileWidth){
 		height = _height;
 		width = _width;
+		tileHeight = _tileHeight;
+		tileWidth = _tileWidth;
 		tiles = new MazeNode[_height][_width];
 		initTiles();
 		start = tiles[1][1];
@@ -62,11 +66,11 @@ public class Maze {
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
 				if (i == 1 && j == 1) {
-					tiles[i][j]= new MazeNode(i,j,true, true, false);
+					tiles[i][j]= new MazeNode(i,j,true, true, false,tileHeight,tileWidth);
 				} else if (i == height - 2 && j == width - 2) {
-					tiles[i][j] = new MazeNode(i,j,true, false, true);
+					tiles[i][j] = new MazeNode(i,j,true, false, true,tileHeight,tileWidth);
 				} else {
-					tiles[i][j] = new MazeNode(i,j,true, false, false);
+					tiles[i][j] = new MazeNode(i,j,true, false, false,tileHeight,tileWidth);
 				}
 			}
 		}
