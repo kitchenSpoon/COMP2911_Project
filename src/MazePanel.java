@@ -22,29 +22,7 @@ public class MazePanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		player = p;
 		player2 = p2;
-		// mazeSquares = new ArrayList<MazeSquare>();
-		// player = new MazeSquare(xStart*20, yStart*20, 20, 20, PLAYER);
 		mazeNodes = mazeNodesIn;
-		// for (int i = 0; i < mazeNodes.length; i++) {
-		// for (MazeNode mn : mazeNodes[i]) {
-		// if (mn.isEnd) {
-		// mazeSquares.add(new MazeSquare(mn.x*20, mn.y*20, 20, 20, END));
-		// //mazeSquares.add(new MazeSquare())
-		// } else if (mn.isWall) {
-		// mazeSquares.add(new MazeSquare(mn.x*20, mn.y*20, 20, 20, WALL));
-		// } else if (mn.isStart) {
-		// mazeSquares.add(new MazeSquare(mn.x*20, mn.y*20, 20, 20, START));
-		// } else {
-		// mazeSquares.add(new MazeSquare(mn.x*20, mn.y*20, 20, 20, PATH));
-		// }
-		// }
-
-		// }
-
-		// MazeSquare mSquare = new MazeSquare(0, 0, 20, 20);
-		// mazeSquares.add(mSquare);
-		// mazeSquares.add(new MazeSquare(20, 0, 20, 20));
-
 	}
 
 	public void moveSquare(Player p, double oldX, double oldY) {
