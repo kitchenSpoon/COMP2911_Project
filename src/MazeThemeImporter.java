@@ -42,10 +42,7 @@ public class MazeThemeImporter {
 				}
 			}
 		} catch (Exception e) {
-			//System.out.println("error error");
 			System.out.println(e.getMessage());
-			System.out.println(e.getStackTrace());
-			System.out.println(e.getCause());
 		}
 		themes = importedThemes;
 	}

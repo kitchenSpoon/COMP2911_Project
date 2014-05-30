@@ -24,10 +24,6 @@ public class GameManager {
 	private boolean newGameClicked = false;
 	private boolean settingsClicked = false;
 	
-	//static ArrayList<ScoreNode> easyScores;
-	//static ArrayList<ScoreNode> mediumScores;
-	//static ArrayList<ScoreNode> hardScores;
-	
 	static Scoreboard easyScores;
 	static Scoreboard mediumScores;
 	static Scoreboard hardScores;
@@ -56,64 +52,7 @@ public class GameManager {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(titleLabel, c);
 		themes = new ArrayList<MazeTheme>();
-		
-//		themes.add(new MazeTheme(Arrays.asList("Default","./images/coin20.png",
-//				"./images/end80.png",
-//				"./images/path80.png",
-//				"./images/player1_20.png",
-//				"./images/player2_20.png",
-//				"./images/preview110.png",
-//				"./images/start80.png",
-//				"./images/wall80.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Lava","./images/lava/coin20.png",
-//				"./images/lava/end20.png",
-//				"./images/lava/path20.png",
-//				"./images/lava/player20.png",
-//				"./images/lava/preview110.png",
-//				"./images/lava/start20.png",
-//				"./images/lava/wall40.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Lava2","./images/lava/coin20.png",
-//				"./images/lava/end20.png",
-//				"./images/lava/path20.png",
-//				"./images/lava/player20.png",
-//				"./images/lava/preview110.png",
-//				"./images/lava/start20.png",
-//				"./images/lava/wall20.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Lava3","./images/lava/coin20.png",
-//				"./images/lava/end20.png",
-//				"./images/lava/path20.png",
-//				"./images/lava/player20.png",
-//				"./images/lava/preview110.png",
-//				"./images/lava/start20.png",
-//				"./images/lava/wall20.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Default2","./images/coin20.png",
-//				"./images/end80.png",
-//				"./images/path80.png",
-//				"./images/player20.png",
-//				"./images/preview110.png",
-//				"./images/start80.png",
-//				"./images/wall80.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Default3","./images/coin20.png",
-//				"./images/end80.png",
-//				"./images/path80.png",
-//				"./images/player20.png",
-//				"./images/preview110.png",
-//				"./images/start80.png",
-//				"./images/wall80.png"
-//				)));
-//		themes.add(new MazeTheme(Arrays.asList("Default4","./images/coin20.png",
-//				"./images/end80.png",
-//				"./images/path80.png",
-//				"./images/player20.png",
-//				"./images/preview110.png",
-//				"./images/start80.png",
-//				"./images/wall80.png"
-//				)));
+
 		MazeThemeImporter importer = new MazeThemeImporter("./images/");
 		themes = importer.getThemes();
 		themePreviews = new ImageStore();
