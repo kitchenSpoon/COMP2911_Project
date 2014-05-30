@@ -32,13 +32,4 @@ public class ImageStore {
 			return null;
 		}
 	}
-	public void addTheme(MazeTheme theme) {
-		for (String s : theme.getImageIds()) {
-			add(theme.getPathOfImage(s), s);
-		}
-	}
-
-	public int size() {
-		return imageRefs.size();
-	}
 }

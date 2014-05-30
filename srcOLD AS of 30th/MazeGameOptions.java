@@ -1,5 +1,3 @@
-import java.awt.Component;
-
 
 /**
  * Used for storing and passing game options around.
@@ -13,19 +11,12 @@ public class MazeGameOptions {
 	private boolean hasMultiplayer;
 	private boolean hasTreasure;
 	private boolean hasSound;
-	private MazeTheme theme;
+	
 	public MazeGameOptions(){
 		difficulty = 0;
 		hasTreasure = false;
 		hasMultiplayer = false;
 		hasSound = true;
-	}
-	/**
-	 * Sets the theme of the maze game.
-	 * @param the MazeTheme object
-	 */
-	public void setTheme(MazeTheme theme) {
-		this.theme = theme;
 	}
 	
 	/**
@@ -90,12 +81,5 @@ public class MazeGameOptions {
 	 */
 	public void setHasTreasure(boolean hasTreasure) {
 		this.hasTreasure = hasTreasure;
-	}
-	/**
-	 * Returns a MazeTheme object, representing the theme of the maze
-	 * @return a MazeTheme object
-	 */
-	public MazeTheme getTheme() {
-		return theme;
 	}
 }

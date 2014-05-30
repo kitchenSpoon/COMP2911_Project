@@ -11,8 +11,7 @@ public class MazePanel extends JPanel {
 	final int PATH = 1;
 	final int START = 2;
 	final int END = 3;
-	final int PLAYER1 = 4;
-	final int PLAYER2 = 5;
+	final int PLAYER = 4;
 	// private MazeSquare player;
 	private Player player;
 	private Player player2;
@@ -71,7 +70,6 @@ public class MazePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// g.drawString("This is my custom Panel!",50,20);
 		for (MazeNode[] row : mazeNodes) {
 			for (MazeNode mn : row) {
 				mn.paint(g);

@@ -19,7 +19,6 @@ public class Player extends Component {
 	private double score;
 	boolean toRender;
 	private int colour;
-	
 	public Player(String n, int _xStart, int _yStart,int _colour) {
 		x = _xStart;
 		y = _yStart;
@@ -111,6 +110,6 @@ public class Player extends Component {
 	 * Paint the image
 	 */
 	public void paint(Graphics g) {
-		g.drawImage(MazeGameManager.mazeImages.getImage(name),x*20, y*20, null);
+		g.drawImage(MazeGameManager.mazeImages.getImage("PLAYER"),x*20, y*20, null);
 	}
 }

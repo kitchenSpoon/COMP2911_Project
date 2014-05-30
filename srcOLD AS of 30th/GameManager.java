@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,10 +32,7 @@ public class GameManager {
 	static Scoreboard hardScores;
 	public final static int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 	public final static int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-	private ArrayList<MazeTheme> themes;
-	private ImageStore themePreviews;
-
-
+	
 	public GameManager() {
 	
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
@@ -55,67 +51,6 @@ public class GameManager {
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		mainPanel.add(titleLabel, c);
-		themes = new ArrayList<MazeTheme>();
-		themes.add(new MazeTheme(Arrays.asList("Default","./images/coin20.png",
-				"./images/end80.png",
-				"./images/path80.png",
-				"./images/player20.png",
-				"./images/preview110.png",
-				"./images/start80.png",
-				"./images/wall80.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Lava","./images/lava/coin20.png",
-				"./images/lava/end20.png",
-				"./images/lava/path20.png",
-				"./images/lava/player20.png",
-				"./images/lava/preview110.png",
-				"./images/lava/start20.png",
-				"./images/lava/wall20.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Lava2","./images/lava/coin20.png",
-				"./images/lava/end20.png",
-				"./images/lava/path20.png",
-				"./images/lava/player20.png",
-				"./images/lava/preview110.png",
-				"./images/lava/start20.png",
-				"./images/lava/wall20.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Lava3","./images/lava/coin20.png",
-				"./images/lava/end20.png",
-				"./images/lava/path20.png",
-				"./images/lava/player20.png",
-				"./images/lava/preview110.png",
-				"./images/lava/start20.png",
-				"./images/lava/wall20.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Default2","./images/coin20.png",
-				"./images/end80.png",
-				"./images/path80.png",
-				"./images/player20.png",
-				"./images/preview110.png",
-				"./images/start80.png",
-				"./images/wall80.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Default3","./images/coin20.png",
-				"./images/end80.png",
-				"./images/path80.png",
-				"./images/player20.png",
-				"./images/preview110.png",
-				"./images/start80.png",
-				"./images/wall80.png"
-				)));
-		themes.add(new MazeTheme(Arrays.asList("Default4","./images/coin20.png",
-				"./images/end80.png",
-				"./images/path80.png",
-				"./images/player20.png",
-				"./images/preview110.png",
-				"./images/start80.png",
-				"./images/wall80.png"
-				)));
-		themePreviews = new ImageStore();
-		for (int i = 0; i < themes.size(); i++) {
-			themePreviews.add(themes.get(i).getPathOfImage("PREVIEW"), themes.get(i).getName());
-		}
 		
 		JButton newMazeButton = new JButton("New Maze");
 		newMazeButton.addActionListener(new ActionListener() {
@@ -186,10 +121,7 @@ public class GameManager {
 		mainFrame.setVisible(true);
 		
 		//default maze settings
-		
 		mazeOptions = new MazeGameOptions();
-		mazeOptions.setTheme(themes.get(0));
-
 				
 		while (true) {
 			gameManagerLoop();
@@ -211,7 +143,7 @@ public class GameManager {
 		}
 		mainFrame.setVisible(false);
 		if (settingsClicked) {
-			new CustomiseMazeGame(mazeOptions, themePreviews, themes);
+			new CustomiseMazeGame(mazeOptions);
 			settingsClicked = false;
 		}
 		else if (newGameClicked) {

@@ -40,16 +40,15 @@ public class MazeGameManager {
 	public static ImageStore mazeImages = new ImageStore();
 	int themeReference;
 	private boolean newGameClicked = false;
-	
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
-		mazeImages.add("./images/end80.png", "END");
-		mazeImages.add("./images/path80.png", "PATH");
-		mazeImages.add("./images/wall80.png", "WALL");
-		mazeImages.add("./images/player1.png", "PLAYER1");
-		mazeImages.add("./images/player2.png", "PLAYER2");
-		mazeImages.add("./images/start80.png", "START");
-		mazeImages.add("./images/coin20.png", "COIN");
+		mazeImages.addTheme(mazeOptions.getTheme());
+//		mazeImages.add("./images/end80.png", "END");
+//		mazeImages.add("./images/path80.png", "PATH");
+//		mazeImages.add("./images/wall80.png", "WALL");
+//		mazeImages.add("./images/player20.png", "PLAYER");
+//		mazeImages.add("./images/start80.png", "START");
+//		mazeImages.add("./images/coin20.png", "COIN");
 		
 	}
 	
@@ -122,11 +121,11 @@ public class MazeGameManager {
 		checkGameOptions(frame);
 		
 		if(maze == null) System.out.println("Maze must be initialized before player");
-		player = new Player("PLAYER1", 1, 1,0);
+		player = new Player("Jack", 1, 1,0);
 		
 		//multiplayer options
 		if(mazeOptions.isHasMultiplayer())
-			player2 = new Player("PLAYER2", maze.getHeight()-2, maze.getWidth()-2,1);
+			player2 = new Player("Jack2", maze.getHeight()-2, maze.getWidth()-2,1);
 		
 		popup = new StatusPopup(frame);
 		frame.add(menuPanel, BorderLayout.NORTH);
