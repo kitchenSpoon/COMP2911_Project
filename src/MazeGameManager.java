@@ -142,15 +142,12 @@ public class MazeGameManager {
 		
 		bottomBar();
 		
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mazePanel, BorderLayout.CENTER);
 		frame.setLocation(GameManager.screenWidth/2-frame.getSize().width/2, GameManager.screenHeight/2-frame.getSize().height/2);
 		frame.setVisible(true);
 		frame.requestFocus();
 		
-		//remove
-		//SoundPlayer.playBGSound();
-		
+				
 		start = System.currentTimeMillis();
 		
 	}
@@ -366,7 +363,6 @@ public class MazeGameManager {
 				SoundPlayer.toggleSound();
 				if(SoundPlayer.getHasSound()){
 					muteToggleButton.setSelected(true);
-					//muteToggleButton.set
 				} else {
 					muteToggleButton.setSelected(false);
 				}
