@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * A class that runs a maze game in a new frame
+ */
 public class MazeGameManager {
 	
 	public final static int WIN = 1;
