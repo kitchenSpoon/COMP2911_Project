@@ -10,7 +10,7 @@ import java.awt.Image;
  */
 public class MazeNode extends Component {
 	int x,y,height,width;
-	boolean isWall, isTreasure, isStart, isEnd, toRender;
+	boolean isWall, isTreasure, isStart, isEnd;
 	
 	public MazeNode(int _x, int _y, boolean _isWall, boolean _isStart, boolean _isEnd, int _height, int _width){
 		x = _x;
@@ -18,7 +18,6 @@ public class MazeNode extends Component {
 		isWall = _isWall;
 		isStart = _isStart;
 		isEnd = _isEnd;
-		toRender = true;
 		height = _height;
 		width = _width;
 	}
