@@ -2,31 +2,26 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Collections;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.text.StyledDocument;
 
 
+/** Class to display the top scores of the maze game in a new frame.
+ */
 public class ScoreboardPrinter {
 
 	private JFrame frame;
 	private JPanel panel;
 	private GridBagConstraints c;
-	private int numOfScores = 3;
+	private int numOfScores = 3; // The number of scores to print
 	private Scoreboard scores;
 	private Font titleFont;
 	private Font textFont;
 	
-	
+	/** 
+	 * Initialises the High Scores frame
+	 */
 	public ScoreboardPrinter () {
 		
 		titleFont = new Font("Title", Font.BOLD, 20);
@@ -55,6 +50,9 @@ public class ScoreboardPrinter {
 		
 	}
 	
+	/**
+	 * Displays the top scores on easy level
+	 */
 	private void easyScores() {
 		
 		JLabel easyTitle = new JLabel("Easy", JLabel.CENTER);
@@ -82,6 +80,9 @@ public class ScoreboardPrinter {
         
 	}
 	
+	/**
+	 * Displays the top scores on the medium level
+	 */
 	private void mediumScores() {
 		
 		JLabel mediumTitle = new JLabel("Medium", JLabel.CENTER);
@@ -109,6 +110,9 @@ public class ScoreboardPrinter {
 		
 	}
 
+	/**
+	 * Displays the top scores on hard level
+	 */
 	private void hardScores() {
 	
 		JLabel hardTitle = new JLabel("Hard", JLabel.CENTER);

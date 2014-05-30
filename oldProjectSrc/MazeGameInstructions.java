@@ -9,6 +9,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
+/**
+ * Displays the instructions for playing the game in a new frame
+ */
 public class MazeGameInstructions {
 	
 	private JFrame frame;
@@ -18,6 +21,9 @@ public class MazeGameInstructions {
 	private Font titleFont;
 	private Font textFont;
 	
+	/**
+	 * Create a new frame with a split pane to show instructions
+	 */
 	public MazeGameInstructions () {
 		
 		titleFont = new Font("Title", Font.BOLD, 20);
@@ -28,7 +34,6 @@ public class MazeGameInstructions {
 		JLabel frameLabel = new JLabel ("HOW TO PLAY MAZE OF DOOM", JLabel.CENTER);
 		frameLabel.setFont(titleFont);
 		frame.add(frameLabel, BorderLayout.NORTH);
-		
 		
 		initialiseSingle();
 		initialiseMultiplayer();
@@ -44,6 +49,9 @@ public class MazeGameInstructions {
 		 
 	}
 	
+	/**
+	 * Display single player instructions in a split pane
+	 */
 	private void initialiseSingle () {
 		
 		JLabel title = new JLabel("Single Player Mode", JLabel.CENTER);
@@ -87,6 +95,9 @@ public class MazeGameInstructions {
 	    
 	}
 	
+	/**
+	 * Display multiplayer instructions in a split pane
+	 */
 	private void initialiseMultiplayer () {
 		
 		JLabel title = new JLabel("Multiplayer Mode", JLabel.CENTER);
