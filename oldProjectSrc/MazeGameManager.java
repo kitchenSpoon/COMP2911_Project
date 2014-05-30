@@ -42,12 +42,13 @@ public class MazeGameManager {
 	private boolean newGameClicked = false;
 	public MazeGameManager(MazeGameOptions _mazeOptions){
 		mazeOptions = _mazeOptions;
-		mazeImages.add("./images/end80.png", "END");
-		mazeImages.add("./images/path80.png", "PATH");
-		mazeImages.add("./images/wall80.png", "WALL");
-		mazeImages.add("./images/player20.png", "PLAYER");
-		mazeImages.add("./images/start80.png", "START");
-		mazeImages.add("./images/coin20.png", "COIN");
+		mazeImages.addTheme(mazeOptions.getTheme());
+//		mazeImages.add("./images/end80.png", "END");
+//		mazeImages.add("./images/path80.png", "PATH");
+//		mazeImages.add("./images/wall80.png", "WALL");
+//		mazeImages.add("./images/player20.png", "PLAYER");
+//		mazeImages.add("./images/start80.png", "START");
+//		mazeImages.add("./images/coin20.png", "COIN");
 		
 	}
 	
