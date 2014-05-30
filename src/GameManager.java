@@ -1,6 +1,4 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -15,7 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * A class that initialises all the objects necessary to run a maze game.
+ * Also creates a frame to act as the main menu.
+ */
 public class GameManager {
 
 	private JFrame mainFrame;
@@ -23,10 +24,6 @@ public class GameManager {
 	private MazeGameOptions mazeOptions;
 	private boolean newGameClicked = false;
 	private boolean settingsClicked = false;
-	
-	//static ArrayList<ScoreNode> easyScores;
-	//static ArrayList<ScoreNode> mediumScores;
-	//static ArrayList<ScoreNode> hardScores;
 	
 	static Scoreboard easyScores;
 	static Scoreboard mediumScores;
@@ -36,7 +33,9 @@ public class GameManager {
 	private ArrayList<MazeTheme> themes;
 	private ImageStore themePreviews;
 
-
+	/**
+	 * Sets up the Game's main menu
+	 */
 	public GameManager() {
 	
 		mainFrame = new JFrame("Maze of Doom: Start Screen");
@@ -197,6 +196,9 @@ public class GameManager {
 			
 	}
 	
+	/**
+	 * Initialises the maze game's score boards
+	 */
 	private void initialiseScoreboards () {
 		
 		easyScores = new Scoreboard(".easy.txt");
@@ -205,7 +207,11 @@ public class GameManager {
 		
 	}
 	
+	/**
+	 * Hides the main menu when a maze is run or the settings screen is opened
+	 */
 	public void gameManagerLoop() {
+		
 		while (!newGameClicked && !settingsClicked) {	
 			System.out.print("");
 		}
@@ -219,10 +225,15 @@ public class GameManager {
 			startNewGame();
 		}
 		mainFrame.setVisible(true);
+	
 	}
 	
+	/**
+	 * Starts a new maze game
+	 */
 	public void startNewGame() {
 		mazeGame = new MazeGameManager(mazeOptions);
 		mazeGame.startGame();
 	}
+	
 }
