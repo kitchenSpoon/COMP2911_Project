@@ -55,6 +55,7 @@ public class CustomiseMazeGame {
 		initialiseDifficulty();
 		initialiseTreasure();
 		initialiseMultiplayer();
+		initialiseSound();
 		initialiseTheme();
 		initialiseDone();
 		
@@ -247,6 +248,40 @@ public class CustomiseMazeGame {
 		
 	}
 
+private void initialiseSound() {
+		
+		JPanel soundPanel = new JPanel ();
+		
+		JLabel soundLabel = new JLabel ("Sounds");
+		soundPanel.add(soundLabel);
+		ButtonGroup soundButtonGroup = new ButtonGroup();
+		JToggleButton noSound = new JToggleButton("Sound Off");
+		noSound.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasSound(false);
+				System.out.println("No sound");
+			}
+		});
+		soundPanel.add(noSound);
+		soundButtonGroup.add(noSound);
+		
+		JToggleButton hasSound = new JToggleButton("Sound on");
+		hasSound.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasSound(true);
+				System.out.println("Sound On");
+			}
+		});
+		soundButtonGroup.add(hasSound);
+		soundPanel.add(hasSound);
+		if (mazeOptions != null && mazeOptions.isHasSound()) {
+			hasSound.setSelected(true);
+		} else {
+			noSound.setSelected(true);
+		}
+		container.add(soundPanel, BorderLayout.SOUTH);
+		
+	}
 	/**
 	 * Show the multiplayer options
 	 * Single Player or Multiplayer (2 Players)

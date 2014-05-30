@@ -98,4 +98,10 @@ public class MazeGameOptions {
 	public MazeTheme getTheme() {
 		return theme;
 	}
+	public void setHasSound(boolean b) {
+		hasSound = b;
+	}
+	public boolean isHasSound() {
+		return hasSound;
+	}
 }

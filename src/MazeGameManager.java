@@ -357,14 +357,26 @@ public class MazeGameManager {
 		});
 		
 		// mute/unmute button
-		final JToggleButton muteToggleButton = new JToggleButton("Mute/Unmute");
+		final JButton muteToggleButton = new JButton("Mute/Unmute");
+		if (mazeOptions.isHasSound()) {
+			muteToggleButton.setText("Sound On");
+		} else {
+			muteToggleButton.setText("Sound Off");
+			SoundPlayer.toggleSound();
+		}
 		muteToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				SoundPlayer.toggleSound();
 				if(SoundPlayer.getHasSound()){
-					muteToggleButton.setSelected(true);
+					mazeOptions.setHasSound(true);
 				} else {
-					muteToggleButton.setSelected(false);
+					mazeOptions.setHasSound(false);
+
+				}
+				if (mazeOptions.isHasSound()) {
+					muteToggleButton.setText("Sound On");
+				} else {
+					muteToggleButton.setText("Sound Off");
 				}
 				frame.requestFocus();
 			}
