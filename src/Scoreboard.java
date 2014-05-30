@@ -37,7 +37,6 @@ public class Scoreboard {
 				while (s.hasNextLine()) {
 					
 					String str = s.nextLine();
-					System.out.println(str);
 					int space = str.indexOf(" ");
 					double score = Double.parseDouble(str.substring(0, space - 1));
 					String player = str.substring(space + 1);
