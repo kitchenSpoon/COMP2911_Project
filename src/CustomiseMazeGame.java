@@ -255,6 +255,15 @@ private void initialiseSound() {
 		JLabel soundLabel = new JLabel ("Sounds");
 		soundPanel.add(soundLabel);
 		ButtonGroup soundButtonGroup = new ButtonGroup();
+		JToggleButton hasSound = new JToggleButton("Sound on");
+		hasSound.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				mazeOptions.setHasSound(true);
+				System.out.println("Sound On");
+			}
+		});
+		soundButtonGroup.add(hasSound);
+		soundPanel.add(hasSound);
 		JToggleButton noSound = new JToggleButton("Sound Off");
 		noSound.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -265,15 +274,7 @@ private void initialiseSound() {
 		soundPanel.add(noSound);
 		soundButtonGroup.add(noSound);
 		
-		JToggleButton hasSound = new JToggleButton("Sound on");
-		hasSound.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				mazeOptions.setHasSound(true);
-				System.out.println("Sound On");
-			}
-		});
-		soundButtonGroup.add(hasSound);
-		soundPanel.add(hasSound);
+		
 		if (mazeOptions != null && mazeOptions.isHasSound()) {
 			hasSound.setSelected(true);
 		} else {
